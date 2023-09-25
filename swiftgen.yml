@@ -1,0 +1,9 @@
+
+xcassets:
+  inputs:
+    # あなたのプロジェクトのパスに変えてください
+    - Turip/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      # あなたのプロジェクトのパスに変えてください
+      output: Turip/Assets.swift
