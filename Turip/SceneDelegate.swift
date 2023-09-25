@@ -110,7 +110,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         } catch {
                             print("Error fetching spot data: \(error)")
                             DispatchQueue.main.async {
-                                //getUserData() エラー
+                                //getUserData() - エラー
                                 self.goHome()
                             }
                         }
