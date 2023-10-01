@@ -1,0 +1,531 @@
+
+/* Class = "UINavigationItem"; title = "GOAL"; ObjectID = "0Fp-tT-Pyw"; */
+"0Fp-tT-Pyw.title" = "GOAL";
+
+/* Class = "UILabel"; text = "Latest Tourism"; ObjectID = "17A-5q-10S"; */
+"17A-5q-10S.text" = "Latest Tourism";
+
+/* Class = "UILabel"; text = "NEW GOAL"; ObjectID = "1sb-fq-04c"; */
+"1sb-fq-04c.text" = "NEW GOAL";
+
+/* Class = "UILabel"; text = "【　　　      】"; ObjectID = "2A0-z6-Rzd"; */
+"2A0-z6-Rzd.text" = "【　　　      】";
+
+/* Class = "UILabel"; text = "Welcome!\nTurip"; ObjectID = "2XP-ov-48P"; */
+"2XP-ov-48P.text" = "Welcome!\nTurip";
+
+/* Class = "UILabel"; text = "？"; ObjectID = "2ax-wv-Xdb"; */
+"2ax-wv-Xdb.text" = "？";
+
+/* Class = "UINavigationItem"; title = "Tourism"; ObjectID = "2e1-Rq-ee8"; */
+"2e1-Rq-ee8.title" = "Tourism";
+
+/* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "35H-Gq-KZc"; */
+"35H-Gq-KZc.title" = "Close";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "36K-bz-MPm"; */
+"36K-bz-MPm.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Welcome!"; ObjectID = "3TF-qf-mjn"; */
+"3TF-qf-mjn.title" = "Welcome!";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "42g-BM-GEj"; */
+"42g-BM-GEj.text" = "0000.00.00";
+
+/* Class = "UILabel"; text = "ゴール"; ObjectID = "4px-NP-wBw"; */
+"4px-NP-wBw.text" = "ゴール";
+
+/* Class = "UILabel"; text = "SAVE"; ObjectID = "4sc-Ya-01V"; */
+"4sc-Ya-01V.text" = "SAVE";
+
+/* Class = "UILabel"; text = "SIGN UP"; ObjectID = "4x9-dR-TcD"; */
+"4x9-dR-TcD.text" = "SIGN UP";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "4xi-kc-Sys"; */
+"4xi-kc-Sys.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "4xi-kc-Sys"; */
+"4xi-kc-Sys.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "50f-bs-LA1"; */
+"50f-bs-LA1.text" = "Sign in";
+
+/* Class = "UINavigationItem"; title = "DATA"; ObjectID = "50m-0j-0wa"; */
+"50m-0j-0wa.title" = "DATA";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "5C5-sJ-LgU"; */
+"5C5-sJ-LgU.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5C5-sJ-LgU"; */
+"5C5-sJ-LgU.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "5fd-cX-Uid"; */
+"5fd-cX-Uid.text" = "Password";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "5mh-Sa-ghe"; */
+"5mh-Sa-ghe.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5mh-Sa-ghe"; */
+"5mh-Sa-ghe.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "61z-rW-unm"; */
+"61z-rW-unm.placeholder" = "SpotName...";
+
+/* Class = "UILabel"; text = "NEXT"; ObjectID = "63g-No-3mV"; */
+"63g-No-3mV.text" = "NEXT";
+
+/* Class = "UILabel"; text = "GOAL"; ObjectID = "6f5-jO-FiF"; */
+"6f5-jO-FiF.text" = "GOAL";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "6uk-jM-mAc"; */
+"6uk-jM-mAc.placeholder" = "Place...";
+
+/* Class = "UINavigationItem"; title = "NEW Trip"; ObjectID = "7fc-DK-Xvv"; */
+"7fc-DK-Xvv.title" = "NEW Trip";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "85u-K0-fWG"; */
+"85u-K0-fWG.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "85u-K0-fWG"; */
+"85u-K0-fWG.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "8ml-nz-mTc"; */
+"8ml-nz-mTc.text" = "📍";
+
+/* Class = "UILabel"; text = "GOOD WORK\nTODAY!"; ObjectID = "9Im-nY-lvB"; */
+"9Im-nY-lvB.text" = "GOOD WORK\nTODAY!";
+
+/* Class = "UITabBarItem"; title = "D A T A"; ObjectID = "AOi-DP-UwU"; */
+"AOi-DP-UwU.title" = "D A T A";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "BHY-3j-POB"; */
+"BHY-3j-POB.text" = "Username";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "Bg7-VU-suy"; */
+"Bg7-VU-suy.text" = "Logout";
+
+/* Class = "UITextField"; placeholder = "Enter Password..."; ObjectID = "Buo-XB-Nto"; */
+"Buo-XB-Nto.placeholder" = "Enter Password...";
+
+/* Class = "UINavigationItem"; title = "LOOK-BACK"; ObjectID = "C0Q-qD-h0K"; */
+"C0Q-qD-h0K.title" = "LOOK-BACK";
+
+/* Class = "UILabel"; text = "Delete\nAccount"; ObjectID = "DXl-Oi-6rK"; */
+"DXl-Oi-6rK.text" = "Delete\nAccount";
+
+/* Class = "UILabel"; text = "Start!"; ObjectID = "Dc3-vy-MLQ"; */
+"Dc3-vy-MLQ.text" = "Start!";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "Dmi-ym-qMT"; */
+"Dmi-ym-qMT.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Dmi-ym-qMT"; */
+"Dmi-ym-qMT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Mail Adress"; ObjectID = "DvU-no-C1A"; */
+"DvU-no-C1A.text" = "Mail Adress";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "E1x-Gu-0n7"; */
+"E1x-Gu-0n7.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "E1x-Gu-0n7"; */
+"E1x-Gu-0n7.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Tripで\n"; ObjectID = "EBT-nO-CIj"; */
+"EBT-nO-CIj.text" = "Tripで\n";
+
+/* Class = "UILabel"; text = "8000"; ObjectID = "EDg-NN-AuI"; */
+"EDg-NN-AuI.text" = "8000";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "Ghn-EP-klm"; */
+"Ghn-EP-klm.placeholder" = "Place...";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "HDL-qB-FF3"; */
+"HDL-qB-FF3.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "HDL-qB-FF3"; */
+"HDL-qB-FF3.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "📍ゴール都道府県"; ObjectID = "HER-Nr-rgF"; */
+"HER-Nr-rgF.text" = "📍ゴール都道府県";
+
+/* Class = "UITextField"; placeholder = "Enter Password..."; ObjectID = "HLT-BT-XAQ"; */
+"HLT-BT-XAQ.placeholder" = "Enter Password...";
+
+/* Class = "UILabel"; text = "NEXT"; ObjectID = "IQe-zl-1lB"; */
+"IQe-zl-1lB.text" = "NEXT";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "Jk5-nx-Td9"; */
+"Jk5-nx-Td9.placeholder" = "SpotName...";
+
+/* Class = "UILabel"; text = "\n訪れた場所"; ObjectID = "JpX-2h-AGl"; */
+"JpX-2h-AGl.text" = "\n訪れた場所";
+
+/* Class = "UITextView"; text = "Spot detail..."; ObjectID = "K5Z-wZ-Ac5"; */
+"K5Z-wZ-Ac5.text" = "Spot detail...";
+
+/* Class = "UILabel"; text = "000"; ObjectID = "Kfe-KD-RJJ"; */
+"Kfe-KD-RJJ.text" = "000";
+
+/* Class = "UITextView"; text = "- - - - -"; ObjectID = "L21-HH-5cM"; */
+"L21-HH-5cM.text" = "- - - - -";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "LAm-Vw-G2Q"; */
+"LAm-Vw-G2Q.placeholder" = "Place...";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "LDf-vT-4JN"; */
+"LDf-vT-4JN.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "LDf-vT-4JN"; */
+"LDf-vT-4JN.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "8000"; ObjectID = "LF2-ca-jZw"; */
+"LF2-ca-jZw.text" = "8000";
+
+/* Class = "UINavigationItem"; title = "Tourism"; ObjectID = "LYo-g2-dC3"; */
+"LYo-g2-dC3.title" = "Tourism";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "LbP-Lb-y5c"; */
+"LbP-Lb-y5c.text" = "0000.00.00";
+
+/* Class = "UILabel"; text = "Spot's Photo"; ObjectID = "Lug-pl-l7z"; */
+"Lug-pl-l7z.text" = "Spot's Photo";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "M95-i5-Mkf"; */
+"M95-i5-Mkf.text" = "Password";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "MUL-H7-bhQ"; */
+"MUL-H7-bhQ.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "MUL-H7-bhQ"; */
+"MUL-H7-bhQ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "Mmp-jr-Itn"; */
+"Mmp-jr-Itn.text" = "📍";
+
+/* Class = "UILabel"; text = "GOALまでの歩数"; ObjectID = "Mub-Ne-2cM"; */
+"Mub-Ne-2cM.text" = "GOALまでの歩数";
+
+/* Class = "UILabel"; text = "Button2"; ObjectID = "NJq-fH-ypS"; */
+"NJq-fH-ypS.text" = "Button2";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "NYU-Ph-M01"; */
+"NYU-Ph-M01.text" = "Time";
+
+/* Class = "UILabel"; text = "Steps"; ObjectID = "NfS-0J-xGh"; */
+"NfS-0J-xGh.text" = "Steps";
+
+/* Class = "UINavigationItem"; title = "LOOK-BACK"; ObjectID = "NzM-ZE-U6J"; */
+"NzM-ZE-U6J.title" = "LOOK-BACK";
+
+/* Class = "UILabel"; text = "Today's Spot"; ObjectID = "O3B-VT-nRm"; */
+"O3B-VT-nRm.text" = "Today's Spot";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "ONQ-Vn-VLj"; */
+"ONQ-Vn-VLj.text" = "📍";
+
+/* Class = "UILabel"; text = "- - - -"; ObjectID = "ONY-kL-vgz"; */
+"ONY-kL-vgz.text" = "- - - -";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "OmV-Ch-bmx"; */
+"OmV-Ch-bmx.text" = "0000.00.00";
+
+/* Class = "UILabel"; text = "START"; ObjectID = "Phf-V0-0rC"; */
+"Phf-V0-0rC.text" = "START";
+
+/* Class = "UILabel"; text = "000"; ObjectID = "Pq0-hy-AZm"; */
+"Pq0-hy-AZm.text" = "000";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "QyU-V3-HCe"; */
+"QyU-V3-HCe.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QyU-V3-HCe"; */
+"QyU-V3-HCe.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "すでにアカウントをお持ちの方はこちら"; ObjectID = "RJe-Yy-UMM"; */
+"RJe-Yy-UMM.configuration.title" = "すでにアカウントをお持ちの方はこちら";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RJe-Yy-UMM"; */
+"RJe-Yy-UMM.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "LOOK-BACK"; ObjectID = "RSA-KK-DCU"; */
+"RSA-KK-DCU.title" = "LOOK-BACK";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "RvU-uU-18e"; */
+"RvU-uU-18e.placeholder" = "SpotName...";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "S1u-JQ-Of6"; */
+"S1u-JQ-Of6.placeholder" = "SpotName...";
+
+/* Class = "UINavigationItem"; title = "Welcome!"; ObjectID = "ShA-r4-u5p"; */
+"ShA-r4-u5p.title" = "Welcome!";
+
+/* Class = "UINavigationItem"; title = "LOOK-BACK"; ObjectID = "Smw-bo-lsZ"; */
+"Smw-bo-lsZ.title" = "LOOK-BACK";
+
+/* Class = "UILabel"; text = "- - - -"; ObjectID = "TYW-22-SRe"; */
+"TYW-22-SRe.text" = "- - - -";
+
+/* Class = "UILabel"; text = "3"; ObjectID = "Tp7-CV-2ZO"; */
+"Tp7-CV-2ZO.text" = "3";
+
+/* Class = "UILabel"; text = "Start\nNew Trip!"; ObjectID = "UG2-mt-uJf"; */
+"UG2-mt-uJf.text" = "Start\nNew Trip!";
+
+/* Class = "UINavigationItem"; title = "Tourism"; ObjectID = "UQT-Ph-wTc"; */
+"UQT-Ph-wTc.title" = "Tourism";
+
+/* Class = "UILabel"; text = "NEW GOAL\nis..."; ObjectID = "Ucx-X9-HkS"; */
+"Ucx-X9-HkS.text" = "NEW GOAL\nis...";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "V0W-lB-AZ4"; */
+"V0W-lB-AZ4.placeholder" = "SpotName...";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VE1-k3-9VW"; */
+"VE1-k3-9VW.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "VzZ-yK-arx"; */
+"VzZ-yK-arx.placeholder" = "Place...";
+
+/* Class = "UILabel"; text = "思い出を入力..."; ObjectID = "WNO-Pv-3S0"; */
+"WNO-Pv-3S0.text" = "思い出を入力...";
+
+/* Class = "UITabBarItem"; title = "T R I P"; ObjectID = "XWS-vV-vVd"; */
+"XWS-vV-vVd.title" = "T R I P";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ZEY-lz-2CM"; */
+"ZEY-lz-2CM.text" = "0";
+
+/* Class = "UILabel"; text = "Tourismで\n"; ObjectID = "ZT6-JI-BhJ"; */
+"ZT6-JI-BhJ.text" = "Tourismで\n";
+
+/* Class = "UILabel"; text = "Today's\nSpot is..."; ObjectID = "Zwz-6l-A16"; */
+"Zwz-6l-A16.text" = "Today's\nSpot is...";
+
+/* Class = "UILabel"; text = "？"; ObjectID = "ZzK-2S-n7L"; */
+"ZzK-2S-n7L.text" = "？";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "bG7-kS-eYA"; */
+"bG7-kS-eYA.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bG7-kS-eYA"; */
+"bG7-kS-eYA.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "bR4-LW-eFf"; */
+"bR4-LW-eFf.text" = "00:00";
+
+/* Class = "UILabel"; text = "Fin."; ObjectID = "bRx-SE-wmR"; */
+"bRx-SE-wmR.text" = "Fin.";
+
+/* Class = "UITabBarItem"; title = "T U R I S M"; ObjectID = "bd3-bn-yJi"; */
+"bd3-bn-yJi.title" = "T U R I S M";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "bxr-KG-7Po"; */
+"bxr-KG-7Po.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bxr-KG-7Po"; */
+"bxr-KG-7Po.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "c4J-dh-dDs"; */
+"c4J-dh-dDs.text" = "0000.00.00";
+
+/* Class = "UILabel"; text = "\n訪れた場所"; ObjectID = "cdk-kd-ywp"; */
+"cdk-kd-ywp.text" = "\n訪れた場所";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "cnX-vE-ppE"; */
+"cnX-vE-ppE.text" = "📍";
+
+/* Class = "UILabel"; text = "Congratulations!\n"; ObjectID = "dvf-4d-N3E"; */
+"dvf-4d-N3E.text" = "Congratulations!\n";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "e30-gP-rMK"; */
+"e30-gP-rMK.text" = "User Name";
+
+/* Class = "UILabel"; text = "Sign up"; ObjectID = "eAX-Gs-BUf"; */
+"eAX-Gs-BUf.text" = "Sign up";
+
+/* Class = "UITextField"; placeholder = "Enter MailAdress.."; ObjectID = "eb9-lH-WTb"; */
+"eb9-lH-WTb.placeholder" = "Enter MailAdress..";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "eg4-yW-OuJ"; */
+"eg4-yW-OuJ.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eg4-yW-OuJ"; */
+"eg4-yW-OuJ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "GOOD WORK\nTODAY!"; ObjectID = "ege-uU-yzG"; */
+"ege-uU-yzG.text" = "GOOD WORK\nTODAY!";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "emA-ET-vxl"; */
+"emA-ET-vxl.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "*****"; ObjectID = "erV-Jt-Aa0"; */
+"erV-Jt-Aa0.title" = "*****";
+
+/* Class = "UILabel"; text = "You are Here!"; ObjectID = "fGx-1V-Q3F"; */
+"fGx-1V-Q3F.text" = "You are Here!";
+
+/* Class = "UITextView"; text = "TextView"; ObjectID = "fVU-f7-8wy"; */
+"fVU-f7-8wy.text" = "TextView";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "fcL-UJ-ezP"; */
+"fcL-UJ-ezP.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fcL-UJ-ezP"; */
+"fcL-UJ-ezP.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "×"; ObjectID = "ffk-o9-PXp"; */
+"ffk-o9-PXp.configuration.title" = "×";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ffk-o9-PXp"; */
+"ffk-o9-PXp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Record Spot!"; ObjectID = "fzC-cc-Qrr"; */
+"fzC-cc-Qrr.text" = "Record Spot!";
+
+/* Class = "UILabel"; text = "SIGN IN"; ObjectID = "gLS-Sw-fu0"; */
+"gLS-Sw-fu0.text" = "SIGN IN";
+
+/* Class = "UITextField"; placeholder = "Enter MailAdress.."; ObjectID = "gW8-CT-X67"; */
+"gW8-CT-X67.placeholder" = "Enter MailAdress..";
+
+/* Class = "UILabel"; text = "Today's Trip"; ObjectID = "ge5-gL-qZ0"; */
+"ge5-gL-qZ0.text" = "Today's Trip";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "ghS-Hp-AIc"; */
+"ghS-Hp-AIc.text" = "📍";
+
+/* Class = "UILabel"; text = "\nGOAL"; ObjectID = "hUS-vw-4YY"; */
+"hUS-vw-4YY.text" = "\nGOAL";
+
+/* Class = "UILabel"; text = "OK"; ObjectID = "htK-Wh-Lg5"; */
+"htK-Wh-Lg5.text" = "OK";
+
+/* Class = "UILabel"; text = "説明はここまで！\n\nそれでは、まずは\n\nTripのGOALを決定しましょう！"; ObjectID = "hxO-um-4E9"; */
+"hxO-um-4E9.text" = "説明はここまで！\n\nそれでは、まずは\n\nTripのGOALを決定しましょう！";
+
+/* Class = "UIButton"; configuration.title = "←Back"; ObjectID = "hyI-So-r62"; */
+"hyI-So-r62.configuration.title" = "←Back";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "hyI-So-r62"; */
+"hyI-So-r62.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "iWC-zW-ZMQ"; */
+"iWC-zW-ZMQ.placeholder" = "Place...";
+
+/* Class = "UILabel"; text = "00000"; ObjectID = "jTY-XJ-am2"; */
+"jTY-XJ-am2.text" = "00000";
+
+/* Class = "UITextField"; placeholder = "SpotName..."; ObjectID = "kD3-9n-bdk"; */
+"kD3-9n-bdk.placeholder" = "SpotName...";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "kLG-6S-he5"; */
+"kLG-6S-he5.text" = "📍";
+
+/* Class = "UILabel"; text = "spots"; ObjectID = "kUD-xO-fSC"; */
+"kUD-xO-fSC.text" = "spots";
+
+/* Class = "UILabel"; text = "GOAL"; ObjectID = "knS-r1-y1g"; */
+"knS-r1-y1g.text" = "GOAL";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "kwg-My-HxH"; */
+"kwg-My-HxH.title" = "Settings";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "l2A-R0-AQq"; */
+"l2A-R0-AQq.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "l2A-R0-AQq"; */
+"l2A-R0-AQq.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Let's Start Tourism!"; ObjectID = "lhZ-9o-T1c"; */
+"lhZ-9o-T1c.text" = "Let's Start Tourism!";
+
+/* Class = "UITextField"; placeholder = "Place..."; ObjectID = "ltK-o0-0Wn"; */
+"ltK-o0-0Wn.placeholder" = "Place...";
+
+/* Class = "UILabel"; text = "spots"; ObjectID = "m4Z-KH-06U"; */
+"m4Z-KH-06U.text" = "spots";
+
+/* Class = "UILabel"; text = "- - - - -"; ObjectID = "mHy-6X-elD"; */
+"mHy-6X-elD.text" = "- - - - -";
+
+/* Class = "UILabel"; text = "Today's Steps"; ObjectID = "mPa-FH-sIs"; */
+"mPa-FH-sIs.text" = "Today's Steps";
+
+/* Class = "UILabel"; text = "NEXT"; ObjectID = "mcZ-aA-pck"; */
+"mcZ-aA-pck.text" = "NEXT";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "nfM-mp-BjT"; */
+"nfM-mp-BjT.text" = "0000.00.00";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "nxG-6g-KNi"; */
+"nxG-6g-KNi.text" = "00:00";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "oet-ah-AVl"; */
+"oet-ah-AVl.text" = "Time";
+
+/* Class = "UILabel"; text = "Today's\nTrip"; ObjectID = "p8d-hg-ztO"; */
+"p8d-hg-ztO.text" = "Today's\nTrip";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "pPj-Zh-lSh"; */
+"pPj-Zh-lSh.text" = "+";
+
+/* Class = "UITextView"; text = "- - - - -"; ObjectID = "paz-AZ-07D"; */
+"paz-AZ-07D.text" = "- - - - -";
+
+/* Class = "UILabel"; text = "Steps"; ObjectID = "qJh-rQ-nbI"; */
+"qJh-rQ-nbI.text" = "Steps";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "s9E-mI-vhF"; */
+"s9E-mI-vhF.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "s9E-mI-vhF"; */
+"s9E-mI-vhF.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "00000"; ObjectID = "sGG-do-lAf"; */
+"sGG-do-lAf.text" = "00000";
+
+/* Class = "UILabel"; text = "「目的地まであと 0000歩」"; ObjectID = "sfR-gV-Dje"; */
+"sfR-gV-Dje.text" = "「目的地まであと 0000歩」";
+
+/* Class = "UILabel"; text = "3"; ObjectID = "t67-4m-Ukp"; */
+"t67-4m-Ukp.text" = "3";
+
+/* Class = "UILabel"; text = "📍- - - - -"; ObjectID = "uas-IU-7Rg"; */
+"uas-IU-7Rg.text" = "📍- - - - -";
+
+/* Class = "UILabel"; text = "ゴール地点名"; ObjectID = "udH-ID-A2V"; */
+"udH-ID-A2V.text" = "ゴール地点名";
+
+/* Class = "UIButton"; configuration.title = "　"; ObjectID = "ugK-TB-TvU"; */
+"ugK-TB-TvU.configuration.title" = "　";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ugK-TB-TvU"; */
+"ugK-TB-TvU.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Mail Adress"; ObjectID = "vQ1-I4-pN9"; */
+"vQ1-I4-pN9.text" = "Mail Adress";
+
+/* Class = "UITextView"; text = "- - - - -"; ObjectID = "vR1-zk-afl"; */
+"vR1-zk-afl.text" = "- - - - -";
+
+/* Class = "UILabel"; text = "GOAL"; ObjectID = "vec-Pa-qyi"; */
+"vec-Pa-qyi.text" = "GOAL";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "w8Z-h7-7Bf"; */
+"w8Z-h7-7Bf.title" = "Settings";
+
+/* Class = "UILabel"; text = "0000.00.00"; ObjectID = "xGz-XO-scQ"; */
+"xGz-XO-scQ.text" = "0000.00.00";
+
+/* Class = "UITextField"; placeholder = "Enter Username..."; ObjectID = "xQV-ah-ybj"; */
+"xQV-ah-ybj.placeholder" = "Enter Username...";
+
+/* Class = "UILabel"; text = "Button1"; ObjectID = "y9K-Wz-7SG"; */
+"y9K-Wz-7SG.text" = "Button1";
+
+/* Class = "UILabel"; text = "Today's Steps"; ObjectID = "zKk-LG-six"; */
+"zKk-LG-six.text" = "Today's Steps";
+
+/* Class = "UINavigationItem"; title = "Welcome!"; ObjectID = "zQW-WC-rLe"; */
+"zQW-WC-rLe.title" = "Welcome!";
