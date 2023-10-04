@@ -3239,7 +3239,7 @@ New Trip!</string>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8fg-TQ-us6"/>
-                        <color key="backgroundColor" red="0.61568627450000002" green="0.4823529412" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.6705882352941176" green="0.51764705882352935" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="dBP-f8-5fH" firstAttribute="leading" secondItem="8fg-TQ-us6" secondAttribute="leading" constant="60" id="1vP-XW-JMV"/>
                             <constraint firstItem="dBP-f8-5fH" firstAttribute="centerY" secondItem="OQZ-Ml-Cef" secondAttribute="centerY" id="Cf6-dV-Bxv"/>
