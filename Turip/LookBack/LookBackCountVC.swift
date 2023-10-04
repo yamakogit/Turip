@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class LookBackCountViewController: UIViewController {
-
+    
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -90,21 +90,21 @@ class LookBackCountViewController: UIViewController {
     
     
     func updatetimeUI() {
-       if secondsCount == 0 {
-           timer?.invalidate()
-           performSegue(withIdentifier: "goNext", sender: self)
-           
-       } else {
-           countLabel.text = "\(secondsCount)"
-           
-           if secondsCount == 3 {
-               imageView.image = Asset.simpleDarkLeaf.image
-           } else if secondsCount == 2 {
-               imageView.image = Asset.simpleRedLeaf.image
-           } else if secondsCount == 1 {
-               imageView.image = Asset.simpleYellowLeaf.image
-           }
-       }
+        if secondsCount == 0 {
+            timer?.invalidate()
+            performSegue(withIdentifier: "goNext", sender: self)
+            
+        } else {
+            countLabel.text = "\(secondsCount)"
+            
+            if secondsCount == 3 {
+                imageView.image = Asset.simpleDarkLeaf.image
+            } else if secondsCount == 2 {
+                imageView.image = Asset.simpleRedLeaf.image
+            } else if secondsCount == 1 {
+                imageView.image = Asset.simpleYellowLeaf.image
+            }
+        }
         print("UISET完了")
     }
     
@@ -124,13 +124,13 @@ class LookBackCountViewController: UIViewController {
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

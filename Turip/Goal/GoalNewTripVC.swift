@@ -43,53 +43,53 @@ class GoalNewTripViewController: UIViewController {
                 let goalSpotData = try await FirebaseClient.shared.getSpotData(spotUID: goalUID)
                 let userData = try await FirebaseClient.shared.getUserData()
                 
-                    self.spotNameTF.text = goalSpotData.name
-                    self.spotPlaceTF.text = goalSpotData.place
+                self.spotNameTF.text = goalSpotData.name
+                self.spotPlaceTF.text = goalSpotData.place
+                
+                let goalCoordinateDict = goalSpotData.coordinate
+                let userCoordinateDict = userData.currentCoordinate
+                
+                let totaldistance: Int = MapClient.calculateDistance(startCoordinateDict: userCoordinateDict!, endCoordinateDict: goalCoordinateDict!) //現在地〜ゴールまでの距離(Int)
+                let todayDistance = UserDefaults.standard.integer(forKey: "calculatedDistance")
+                
+                let remainingDistance = totaldistance - todayDistance //残歩数
+                self.remainingSteps.text = "\(remainingDistance)"
+                
+                
+                //今日はゴールしなかった場合 -> 新現在地は算出済/UDにあり
+                let newUserLocation: [String : Any]? = UserDefaults.standard.dictionary(forKey: "newCoordinate")
+                print("newCoordinate: \(newUserLocation ?? ["！":"値がないお"])")
+                var newUserLocation2 = newUserLocation as? [String:String] //型変換
+                
+                //今日ゴールしている場合 -> 新現在地は未算出/UDになしのためこれから算出
+                if newUserLocation2 == nil {
+                    newUserLocation2 = MapClient.decideNewLocation(startCoordinateDict: userCoordinateDict!, endCoordinateDict: goalCoordinateDict!, distance: Double(todayDistance)) //最新の現在地
+                }
+                
+                print("newCoordinate2: \(newUserLocation2 ?? ["!!":"値がないお2"])")
+                
+                do {
                     
-                    let goalCoordinateDict = goalSpotData.coordinate
-                    let userCoordinateDict = userData.currentCoordinate
+                    var startCoordinateDict = userData.startCoordinate
                     
-                    let totaldistance: Int = MapClient.calculateDistance(startCoordinateDict: userCoordinateDict!, endCoordinateDict: goalCoordinateDict!) //現在地〜ゴールまでの距離(Int)
-                    let todayDistance = UserDefaults.standard.integer(forKey: "calculatedDistance")
-                    
-                    let remainingDistance = totaldistance - todayDistance //残歩数
-                    self.remainingSteps.text = "\(remainingDistance)"
-                    
-                    
-                    //今日はゴールしなかった場合 -> 新現在地は算出済/UDにあり
-                    var newUserLocation: [String : Any]? = UserDefaults.standard.dictionary(forKey: "newCoordinate")
-                    print("newCoordinate: \(newUserLocation ?? ["！":"値がないお"])")
-                    var newUserLocation2 = newUserLocation as? [String:String] //型変換
-                    
-                    //今日ゴールしている場合 -> 新現在地は未算出/UDになしのためこれから算出
-                    if newUserLocation2 == nil {
-                        newUserLocation2 = MapClient.decideNewLocation(startCoordinateDict: userCoordinateDict!, endCoordinateDict: goalCoordinateDict!, distance: Double(todayDistance)) //最新の現在地
+                    if self.naviTitle == "New Trip" {
+                        //新旅のためstartCoordinateDictも更新
+                        startCoordinateDict = newUserLocation2
                     }
                     
-                    print("newCoordinate2: \(newUserLocation2 ?? ["!!":"値がないお2"])")
+                    try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: newUserLocation2, steps: "\(remainingDistance)", startCoordinateDict: startCoordinateDict)
+                    print("現在地更新保存完了")
                     
-                        do {
-                            
-                            var startCoordinateDict = userData.startCoordinate
-                            
-                            if self.naviTitle == "New Trip" {
-                                //新旅のためstartCoordinateDictも更新
-                                startCoordinateDict = newUserLocation2
-                            }
-                            
-                            try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: newUserLocation2, steps: "\(remainingDistance)", startCoordinateDict: startCoordinateDict)
-                                print("現在地更新保存完了")
-                            
-                        } catch {
-                            print("Error fetching spot data5/6: \(error)")
-                        }
-                    
-                    
+                } catch {
+                    print("Error fetching spot data5/6: \(error)")
+                }
+                
+                
                 
             } catch {
                 print("Error")
-                    self.spotNameTF.text = "Error"
-                    self.spotPlaceTF.text = "Error"
+                self.spotNameTF.text = "Error"
+                self.spotPlaceTF.text = "Error"
             }
         }
         
@@ -99,15 +99,15 @@ class GoalNewTripViewController: UIViewController {
         self.performSegue(withIdentifier: "goHome", sender: self)
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -23,7 +23,7 @@ class AlertHost {
         alertVC.addAction(UIAlertAction(title: b2Title, style: .cancel, handler: nil))
         view.present(alertVC, animated: true)
     }
-
+    
     //TF付きAlert
     static func alertTF(view: UIViewController, alertTitle: String, alertMessage: String, tfPlaceText: String, b1Title: String, b1Style: UIAlertAction.Style, b2Title: String, b1Handler: ((UIAlertAction, String?) -> Void)? = nil) {
         let alertVC = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)

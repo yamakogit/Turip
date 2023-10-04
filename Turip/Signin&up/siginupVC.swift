@@ -56,7 +56,7 @@ class signupViewController: UIViewController, UITextFieldDelegate {
     
     func setTFAttributed(_ tf: UITextField, kind: String) {
         tf.attributedPlaceholder = NSAttributedString(string: "Enter \(kind)...",
-                                                         attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
+                                                      attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
     }
     
     

@@ -42,12 +42,12 @@ class NotificationClient {
         dateComponents.calendar = Calendar.current
         dateComponents.hour = hour    // 指定した時間(__:00)に設定
         print("通知時刻: \(hour):00")
-           
+        
         let trigger = UNCalendarNotificationTrigger(
-                 dateMatching: dateComponents, repeats: true)
+            dateMatching: dateComponents, repeats: true)
         let uuidString = UUID().uuidString
         let request = UNNotificationRequest(identifier: uuidString,
-                    content: content, trigger: trigger)
+                                            content: content, trigger: trigger)
         scheduleRequest(request: request)
     }
     
@@ -66,7 +66,7 @@ class NotificationClient {
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: false)
         let identifier = "tourNotification"
         let request = UNNotificationRequest(identifier: identifier,
-                    content: content, trigger: trigger)
+                                            content: content, trigger: trigger)
         
         scheduleRequest(request: request)
     }
@@ -81,11 +81,11 @@ class NotificationClient {
     func scheduleRequest(request: UNNotificationRequest) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.add(request) { (error) in
-           if error != nil {
+            if error != nil {
                 print("通知エラー")
-           } else {
-               print("通知設定完了")
-           }
+            } else {
+                print("通知設定完了")
+            }
         }
     }
     

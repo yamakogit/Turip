@@ -12,7 +12,7 @@ import FirebaseAuth
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
-
+    
     @IBOutlet weak var tripTimeLabel: UILabel!
     
     override func viewDidLoad() {
@@ -23,9 +23,9 @@ class SettingsViewController: UIViewController {
                 let userData = try await FirebaseClient.shared.getUserData()
                 let tripHour = UserDefaults.standard.integer(forKey: "tripHour")
                 
-                    let userName = userData.name
-                    self.userNameLabel.text = userName
-                    self.tripTimeLabel.text = "\(tripHour) 時"
+                let userName = userData.name
+                self.userNameLabel.text = userName
+                self.tripTimeLabel.text = "\(tripHour) 時"
                 
             } catch {
                 print("Error fetching spot data: \(error)") //失敗
@@ -36,7 +36,7 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func editTripTime() {
-     
+        
         AlertHost.alertTF(view: self, alertTitle: "Tripの開始時間を設定", alertMessage: "開始時間になると通知が届き、\nアプリを開くとTripが始まります。", tfPlaceText: "0~23のいずれかを入力...", b1Title: "設定", b1Style: .default, b2Title: "キャンセル") { (_, inputText) in
             
             let hour = Int(inputText ?? "25")
@@ -95,51 +95,51 @@ class SettingsViewController: UIViewController {
     
     @IBAction func deleteAccount() {
         
-            AlertHost.alertDoubleDef(view: self, alertTitle: "アカウント削除しますか？", alertMessage: "アカウントを削除すると、再度ログインするまでアプリを利用できません。", b1Title: "アカウント削除", b1Style: .destructive, b2Title: "キャンセル") { _ in
-                
-                OtherHosts.activityIndicatorView(view: self.view).startAnimating()
-                
-                //UD ALL削除
-                let appDomain = Bundle.main.bundleIdentifier
-                UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-                
-                let user = Auth.auth().currentUser
-                user?.delete { error in
-                    if error != nil {
-                        // An error happened.
-                        OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
-                        AlertHost.alertDef(view:self, title: "エラー", message: "アカウント削除に失敗しました")
-                        
-                    } else {
-                        // Account deleted.
-                        OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
-                        AlertHost.alertDef(view: self, title: "アカウント削除完了", message: "トップページへ戻ります") { _ in
-                            guard let window = UIApplication.shared.keyWindow else { return }
-                            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            if window.rootViewController?.presentedViewController != nil {
-                                // モーダルを開いていたら閉じてから差し替え
-                                window.rootViewController?.dismiss(animated: true) {
-                                    window.rootViewController = storyboard.instantiateInitialViewController()
-                                }
-                            } else {
-                                // モーダルを開いていなければそのまま差し替え
+        AlertHost.alertDoubleDef(view: self, alertTitle: "アカウント削除しますか？", alertMessage: "アカウントを削除すると、再度ログインするまでアプリを利用できません。", b1Title: "アカウント削除", b1Style: .destructive, b2Title: "キャンセル") { _ in
+            
+            OtherHosts.activityIndicatorView(view: self.view).startAnimating()
+            
+            //UD ALL削除
+            let appDomain = Bundle.main.bundleIdentifier
+            UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+            
+            let user = Auth.auth().currentUser
+            user?.delete { error in
+                if error != nil {
+                    // An error happened.
+                    OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
+                    AlertHost.alertDef(view:self, title: "エラー", message: "アカウント削除に失敗しました")
+                    
+                } else {
+                    // Account deleted.
+                    OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
+                    AlertHost.alertDef(view: self, title: "アカウント削除完了", message: "トップページへ戻ります") { _ in
+                        guard let window = UIApplication.shared.keyWindow else { return }
+                        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        if window.rootViewController?.presentedViewController != nil {
+                            // モーダルを開いていたら閉じてから差し替え
+                            window.rootViewController?.dismiss(animated: true) {
                                 window.rootViewController = storyboard.instantiateInitialViewController()
                             }
+                        } else {
+                            // モーダルを開いていなければそのまま差し替え
+                            window.rootViewController = storyboard.instantiateInitialViewController()
                         }
                     }
                 }
             }
+        }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

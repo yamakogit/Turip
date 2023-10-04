@@ -39,7 +39,7 @@ class OtherHosts {
             
             if let placemark = placemarks.first {
                 if let prefecture = placemark.administrativeArea, let locality = placemark.locality {
-//                    let address = "\(prefecture)\(locality)" //市区町村
+                    //                    let address = "\(prefecture)\(locality)" //市区町村
                     let address = "\(prefecture)" //都道府県
                     
                     return address
@@ -151,5 +151,5 @@ class OtherHosts {
         var minute: String?
         var second: String?
     }
-
+    
 }

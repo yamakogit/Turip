@@ -261,7 +261,7 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
         
         Task {
             do {
-                var photoURL2 = try await FirebaseClient().saveSpotImage(spotImage: spotImageView.image ?? Asset.leafRed.image)
+                let photoURL2 = try await FirebaseClient().saveSpotImage(spotImage: spotImageView.image ?? Asset.leafRed.image)
                 self.photoURL = photoURL2
                 
             } catch {
@@ -278,8 +278,8 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
             do {
                 //現在地の住所
                 self.placeAdress = try await OtherHosts.conversionAdress(lat: photoLocation.latitude, lng: photoLocation.longitude) //photoLocationより住所の特定
-                    self.plusLabel.isHidden = true
-                    picker.dismiss(animated: true, completion: nil)
+                self.plusLabel.isHidden = true
+                picker.dismiss(animated: true, completion: nil)
                 
             } catch {
                 print("Error fetching spot date7/8: \(error)")

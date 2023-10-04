@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class GoalCountViewController: UIViewController {
-
+    
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -20,7 +20,7 @@ class GoalCountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         self.navigationController?.navigationBar.isHidden = false
@@ -53,9 +53,9 @@ class GoalCountViewController: UIViewController {
                             do {
                                 let userData = try await FirebaseClient.shared.getUserData()
                                 let spotData = try await FirebaseClient.shared.getSpotData(spotUID: self.nextGoalUID) //新ゴール候補のデータ取得
-                                    
-                                    distance = MapClient.calculateDistance(startCoordinateDict: userData.currentCoordinate!, endCoordinateDict: spotData.coordinate!)
-                                    pregoalUID = userData.goalUID!
+                                
+                                distance = MapClient.calculateDistance(startCoordinateDict: userData.currentCoordinate!, endCoordinateDict: spotData.coordinate!)
+                                pregoalUID = userData.goalUID!
                                 
                             } catch {
                                 print("エラー")
@@ -67,7 +67,7 @@ class GoalCountViewController: UIViewController {
                     Task {
                         do {
                             try await FirebaseClient.shared.saveUserDatas(goalUID: self.nextGoalUID) //新ゴールのUID保存
-                                print("saveNewGoal完了")
+                            print("saveNewGoal完了")
                             
                         } catch {
                             print("エラー")
@@ -87,21 +87,21 @@ class GoalCountViewController: UIViewController {
     
     
     func updatetimeUI() {
-       if secondsCount == 0 {
-           timer?.invalidate()
-           performSegue(withIdentifier: "goNext", sender: self)
-           
-       } else {
-           countLabel.text = "\(secondsCount)"
-           
-           if secondsCount == 3 {
-               imageView.image = Asset.simpleDarkLeaf.image
-           } else if secondsCount == 2 {
-               imageView.image = Asset.simpleRedLeaf.image
-           } else if secondsCount == 1 {
-               imageView.image = Asset.simpleYellowLeaf.image
-           }
-       }
+        if secondsCount == 0 {
+            timer?.invalidate()
+            performSegue(withIdentifier: "goNext", sender: self)
+            
+        } else {
+            countLabel.text = "\(secondsCount)"
+            
+            if secondsCount == 3 {
+                imageView.image = Asset.simpleDarkLeaf.image
+            } else if secondsCount == 2 {
+                imageView.image = Asset.simpleRedLeaf.image
+            } else if secondsCount == 1 {
+                imageView.image = Asset.simpleYellowLeaf.image
+            }
+        }
         print("UISET完了")
     }
     
@@ -123,13 +123,13 @@ class GoalCountViewController: UIViewController {
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -28,7 +28,7 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var okImageD: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
-
+    
     var spotData: FirebaseClient.SpotDataSet = FirebaseClient.SpotDataSet()
     var date: String?
     var assignedDate: String = ""
@@ -36,7 +36,7 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     
     let db = Firestore.firestore()
-//    var date: String = ""
+    //    var date: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,24 +58,14 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         assignedDate = date ?? nowDate
         
         //Imageの取得・表示
-//        FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-//            if let image = image {
-//                DispatchQueue.main.async {
-//                    self?.spotImage.image = image
-//                }
-//            }
-//        }
-        
-        Task {
-            do {
-                let spotImage = try await FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
-                self.spotImage.image = spotImage
-                
-            } catch {
-                print("エラー")
+        FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+            if let image = image {
+                DispatchQueue.main.async {
+                    self?.spotImage.image = image
+                }
             }
         }
-            
+        
         dateLabel.text = assignedDate
         spotNameTF.text = spotData.name ?? ""
         spotPlaceTF.text = spotData.place ?? ""
@@ -207,7 +197,7 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         }
     }
     
-
+    
     //MARK: SEGUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTourismDetail" {
@@ -218,13 +208,13 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }

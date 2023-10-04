@@ -117,38 +117,23 @@ class DataViewController: UIViewController {
                     self.tourPlaceNumbers.text = "\(spotsCount.tourism)"
                     
                     //Imageの取得・表示
-//                    FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-//                        if let image = image {
-//                            DispatchQueue.main.async {
-//                                self?.tripImage.image = image
-//                                self?.tripPhoto = image
-//                            }
-//                        }
-//                    }
-//                    
-//                    
-//                    
-//                    FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-//                        if let image = image {
-//                            DispatchQueue.main.async {
-//                                self?.tourImage.image = image
-//                                self?.tourPhoto = image
-//                            }
-//                        }
-//                    }
+                    FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+                        if let image = image {
+                            DispatchQueue.main.async {
+                                self?.tripImage.image = image
+                                self?.tripPhoto = image
+                            }
+                        }
+                    }
                     
-                    
-                    
-                    let tripImage2 = try await FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
-                    self.tripImage.image = tripImage2
-                    self.tripPhoto = tripImage2
-                    
-                    let tourImage2 = try await FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
-                    self.tourImage.image = tourImage2
-                    self.tourPhoto = tourImage2
-                    
-                    
-                    
+                    FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+                        if let image = image {
+                            DispatchQueue.main.async {
+                                self?.tourImage.image = image
+                                self?.tourPhoto = image
+                            }
+                        }
+                    }
                     
                 } catch {
                     print("Error fetching spot data5/6: \(error)")

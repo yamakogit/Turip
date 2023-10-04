@@ -8,7 +8,7 @@
 import UIKit
 
 class LookBackStepViewController: UIViewController {
-
+    
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var stepGlaph: UIImageView!
     
@@ -70,15 +70,15 @@ class LookBackStepViewController: UIViewController {
         stepLabel.text = "\(stepsInt)"
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

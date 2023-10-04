@@ -19,7 +19,7 @@ class TutorialAccessVC: UIViewController, CLLocationManagerDelegate {
     let pedometer = CMPedometer()
     let locationManager = CLLocationManager()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

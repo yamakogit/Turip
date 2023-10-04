@@ -59,16 +59,14 @@ class LookBackSpotViewController: UIViewController {
                 self.spotDetailTV.text = spotData.detail
                 
                 //Imageの取得・表示
-//                FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-//                    if let image = image {
-//                        DispatchQueue.main.async {
-//                            self?.spotImage.image = image
-//                        }
-//                    }
-//                }
+                FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+                    if let image = image {
+                        DispatchQueue.main.async {
+                            self?.spotImage.image = image
+                        }
+                    }
+                }
                 
-                let image = try await FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
-                self.spotImage.image = image
                 
             } catch {
                 print("Error fetching spot data5/6: \(error)")

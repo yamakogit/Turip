@@ -26,7 +26,7 @@ class FirebaseClient {
     static let shared = FirebaseClient()
     
     enum errorList: Error {
-    case getUserUidError
+        case getUserUidError
     }
     
     
@@ -47,9 +47,9 @@ class FirebaseClient {
     //userData取得 (Firestore)
     func getUserData() async throws -> UserDataSet {
         //uuid取得
-//        if userUid == ""  {
-            try await getUserUid()
-//        }
+        //        if userUid == ""  {
+        try await getUserUid()
+        //        }
         
         let snapshot = try await db.collection("User").document(userUid).getDocument()
         
@@ -72,14 +72,14 @@ class FirebaseClient {
         let userData = try await getUserData()
         let goalUID = userData.goalUID ?? ""
         
-            do {
-                let goalData = try await getSpotData(spotUID: goalUID)
-                print("spotData is available.\nuserData: \(goalData)")
-                return goalData
-            } catch {
-                print("Error fetching spot data: \(error)")
-                return SpotDataSet()
-            }
+        do {
+            let goalData = try await getSpotData(spotUID: goalUID)
+            print("spotData is available.\nuserData: \(goalData)")
+            return goalData
+        } catch {
+            print("Error fetching spot data: \(error)")
+            return SpotDataSet()
+        }
     }
     
     
@@ -222,17 +222,15 @@ class FirebaseClient {
     
     
     //URLよりStorageから写真の取得
-    func getSpotImage(url: String) async throws -> UIImage? {
-        let imageURL: URL = URL(string: url)!
-        
-        return try await withCheckedThrowingContinuation { continuation in
-            KingfisherManager.shared.downloader.downloadImage(with: imageURL) { result in
-                switch result {
-                case .success(let value):
-                    continuation.resume(returning: value.image)
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
+    func getSpotImage(url: String, completion: @escaping (UIImage?) -> Void) {
+        let imageURL: URL = URL(string:url)!
+        KingfisherManager.shared.downloader.downloadImage(with: imageURL) { result in
+            switch result {
+            case .success(let value):
+                completion(value.image)
+            case .failure(let error):
+                print(error)
+                completion(nil)
             }
         }
     }

@@ -64,28 +64,18 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
                             
                             //写真の取得
                             let spotPhotoURL = spotDataDetail.photoURL
-//                            FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-//                                if let image = image {
-//                                    DispatchQueue.main.async {
-//                                        let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: dateSet.month, day: dateSet.day, imageName: image, leafType: spotLeafType ?? "1", date: dateSet.date, spotData: spotDataDetail)
-//                                        print("追加！")
-//                                        self?.mapView.addAnnotation(annotation)
-//                                    }
-//                                }
-//                            }
-                            
-                            do {
-                                
-                                let image = try await FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
-                                let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: dateSet.month, day: dateSet.day, imageName: image!, leafType: spotLeafType ?? "1", date: dateSet.date, spotData: spotDataDetail)
-                                self.mapView.addAnnotation(annotation)
-                                print("追加！")
+                            FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+                                if let image = image {
+                                    DispatchQueue.main.async {
+                                        let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: dateSet.month, day: dateSet.day, imageName: image, leafType: spotLeafType ?? "1", date: dateSet.date, spotData: spotDataDetail)
+                                        print("追加！")
+                                        self?.mapView.addAnnotation(annotation)
+                                    }
+                                }
                             }
-                            
                         } catch {
-                            print("スポットエラー: \(error)") //エラー
+                            print("Error fetching spot data5/6: \(error)") //エラー
                         }
-                        
                     }
                 }
                 
@@ -315,8 +305,6 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
     }
     
 }
-
-
 
 
 
