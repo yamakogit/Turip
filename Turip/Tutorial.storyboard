@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -490,9 +490,9 @@ Map上を仮想に進みます。</string>
                                 </constraints>
                                 <string key="text">Tripでは、
 
-「黄色」か「緑色」
+「黄色」か「緑色」の"Spot"
 
-の葉を手に入れることができます。</string>
+を手に入れることができます。</string>
                                 <fontDescription key="fontDescription" name="craftmincho" family="craftmincho" pointSize="18"/>
                                 <color key="textColor" name="colorDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -646,9 +646,9 @@ Map上を仮想に進みます。</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="iCI-NM-Ahp"/>
                                 </constraints>
-                                <string key="text">※写真とコメントは、全ユーザーに公開されます。
-　個人情報やその他機密情報の記入・掲載は
-　おやめください。</string>
+                                <string key="text">※写真とコメントは、「Trip」のSpotとして
+　他のユーザーに提供されます。
+  個人情報等の記入・掲載はおやめください。</string>
                                 <fontDescription key="fontDescription" name="craftmincho" family="craftmincho" pointSize="13"/>
                                 <color key="textColor" red="0.7803921568627451" green="0.26666666666666666" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -707,7 +707,9 @@ Map上を仮想に進みます。</string>
                                 </constraints>
                                 <string key="text">Tourismでは、
 
-赤色の葉っぱをGetすることができます。</string>
+赤色の"Spot"を
+
+Getすることができます。</string>
                                 <fontDescription key="fontDescription" name="craftmincho" family="craftmincho" pointSize="18"/>
                                 <color key="textColor" name="colorDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -838,7 +840,7 @@ Map上を仮想に進みます。</string>
             <color red="0.23137254901960785" green="0.23137254901960785" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="colorLightGray">
-            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

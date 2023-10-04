@@ -37,6 +37,10 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
         Task {
             do {
                 let userData = try await FirebaseClient.shared.getUserData()
+                let goalData = try await FirebaseClient.shared.getGoalData()
+                
+                setGoals(userData: userData, goalData: goalData) //ゴール設定
+                
                 print("userData取得完了")
                 let userAllSpotDatas = userData.spots
                 
@@ -79,8 +83,6 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
                     }
                 }
                 
-                let goalData = try await FirebaseClient.shared.getGoalData()
-                setGoalAnnotation(userData: userData, goalData: goalData)
                 
             } catch {
                 print("Error fetching spot data5/6: \(error)") //エラー
@@ -253,7 +255,7 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
     }
     
     
-    func setGoalAnnotation(userData: FirebaseClient.UserDataSet, goalData:  FirebaseClient.SpotDataSet) {
+    func setGoals(userData: FirebaseClient.UserDataSet, goalData:  FirebaseClient.SpotDataSet) {
         
         //ゴールの表示
         self.spotName = goalData.name ?? "- - - -"
