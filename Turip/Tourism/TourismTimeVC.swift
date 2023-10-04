@@ -6,54 +6,35 @@
 //
 
 import UIKit
-import MapKit
-import CoreLocation
 
-class TourismStartViewController: UIViewController, CLLocationManagerDelegate {
+class TourismTimeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
     
-    var locatioManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        locatioManager = CLLocationManager()
-        locatioManager.delegate = self
-        locatioManager.startUpdatingLocation()
-        locatioManager.requestWhenInUseAuthorization()  //位置情報使用許可ダイアログ
-        
-        mapView.showsUserLocation = true
-        mapView.isUserInteractionEnabled = false
-        
-        var value = NetworkMonitor(self)
-//        print("value: *\(value)*")
-        
+        self.navigationItem.hidesBackButton = true
         
     }
     
     
-    //位置情報が更新されたら呼ばれる
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
-        if let location = locations.last {
-            // 現在地を地図の中央に表示
-            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 250, longitudinalMeters: 250)
-            mapView.setRegion(region, animated: true)
+    
+    @IBAction func tapTimebuttons(_ sender: UIButton) {
+        NotificationClient.shared.requestNotification(self) //許可を求める
+        let buttonTag = sender.tag
+        
+        if buttonTag == 1 { //5分間
+            NotificationClient.shared.setTourNotification(from: 1, to: 5)
+            
+        } else if buttonTag == 2 { //15分間
+            NotificationClient.shared.setTourNotification(from: 3, to: 15)
+            
+        } else if buttonTag == 3 { //30分間
+            NotificationClient.shared.setTourNotification(from: 8, to: 25)
         }
-    }
-    
-    
-    @IBAction func tapStart() {
-        self.performSegue(withIdentifier: "selectTime", sender: self)
-    }
-    
-    
-    @IBAction func goTutorial() {
-        //MARK: 遷移
-        let tutorialPageVC = TutorialPageViewController()
-        tutorialPageVC.comeFrom = "tour"
-        self.present(tutorialPageVC, animated: true, completion: nil)
+        
+        self.performSegue(withIdentifier: "startTourism", sender: self)
     }
     
     

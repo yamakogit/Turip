@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1130A372ACB09CE00CF105F /* NotificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1130A362ACB09CE00CF105F /* NotificationClient.swift */; };
+		E1130A392ACC24C000CF105F /* TourismTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1130A382ACC24C000CF105F /* TourismTimeVC.swift */; };
 		E124E2A02A88CF3700B44569 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E124E29F2A88CF3700B44569 /* HealthKit.framework */; };
 		E128136C2A9EF36700409678 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E128136B2A9EF36700409678 /* Tutorial.storyboard */; };
 		E128136E2A9F6A3E00409678 /* TutorialPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128136D2A9F6A3E00409678 /* TutorialPageVC.swift */; };
@@ -53,6 +55,7 @@
 		E1B22F5A2A821E4A009DDFCB /* TourismDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B22F592A821E4A009DDFCB /* TourismDetailVC.swift */; };
 		E1B22F5D2A821EA0009DDFCB /* SpotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B22F5C2A821EA0009DDFCB /* SpotVC.swift */; };
 		E1B592BB2AAB5D0D00715FC3 /* TutorialAccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B592BA2AAB5D0D00715FC3 /* TutorialAccessVC.swift */; };
+		E1B5E4142AC8FD6F006E57D3 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B5E4132AC8FD6F006E57D3 /* NetworkMonitor.swift */; };
 		E1D2DD722A98C60A00C0E94C /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D2DD712A98C60A00C0E94C /* SettingsVC.swift */; };
 		E1D2DD742A99707C00C0E94C /* TripMapNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D2DD732A99707C00C0E94C /* TripMapNewVC.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1130A362ACB09CE00CF105F /* NotificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationClient.swift; sourceTree = "<group>"; };
+		E1130A382ACC24C000CF105F /* TourismTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourismTimeVC.swift; sourceTree = "<group>"; };
 		E124E29F2A88CF3700B44569 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		E124E2A32A88DEB400B44569 /* Turip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turip.entitlements; sourceTree = "<group>"; };
 		E128136B2A9EF36700409678 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 		E1B22F592A821E4A009DDFCB /* TourismDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourismDetailVC.swift; sourceTree = "<group>"; };
 		E1B22F5C2A821EA0009DDFCB /* SpotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotVC.swift; sourceTree = "<group>"; };
 		E1B592BA2AAB5D0D00715FC3 /* TutorialAccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialAccessVC.swift; sourceTree = "<group>"; };
+		E1B5E4132AC8FD6F006E57D3 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E1D2DD712A98C60A00C0E94C /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		E1D2DD732A99707C00C0E94C /* TripMapNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMapNewVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +209,8 @@
 				E13BFE6A2A84B2C00097CEB0 /* OtherHosts.swift */,
 				E147B2132A87ACB900D1D7D8 /* AlertHost.swift */,
 				E12F494A2A98499400268D0C /* MapClient.swift */,
+				E1130A362ACB09CE00CF105F /* NotificationClient.swift */,
+				E1B5E4132AC8FD6F006E57D3 /* NetworkMonitor.swift */,
 			);
 			path = Host;
 			sourceTree = "<group>";
@@ -286,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				E15CED8B2A7F21760053F503 /* TourismStartVC.swift */,
+				E1130A382ACC24C000CF105F /* TourismTimeVC.swift */,
 				E1B22F572A821DD3009DDFCB /* TourismRunningVC.swift */,
 				E1B22F592A821E4A009DDFCB /* TourismDetailVC.swift */,
 			);
@@ -385,7 +394,7 @@
 		E15CED4E2A7F01A80053F503 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = NO;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
@@ -404,11 +413,11 @@
 			};
 			buildConfigurationList = E15CED512A7F01A80053F503 /* Build configuration list for PBXProject "Turip" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ja,
 			);
 			mainGroup = E15CED4D2A7F01A80053F503;
 			packageReferences = (
@@ -486,17 +495,20 @@
 			files = (
 				E15CED8C2A7F21760053F503 /* TourismStartVC.swift in Sources */,
 				E13BFE5E2A845B100097CEB0 /* LookBackStepVC.swift in Sources */,
+				E1130A372ACB09CE00CF105F /* NotificationClient.swift in Sources */,
 				E12F494D2A98563800268D0C /* LookBackCountVC.swift in Sources */,
 				E14F357A2A9729A10097B168 /* LookBackLocationVC.swift in Sources */,
 				E15CED8A2A7F216C0053F503 /* DataVC.swift in Sources */,
 				E13BFE652A845D700097CEB0 /* GoalTopVC.swift in Sources */,
 				E13BFE6D2A84B3E80097CEB0 /* FirebaseClient.swift in Sources */,
 				E12F494B2A98499400268D0C /* MapClient.swift in Sources */,
+				E1130A392ACC24C000CF105F /* TourismTimeVC.swift in Sources */,
 				E147B2172A87B72100D1D7D8 /* signinVC.swift in Sources */,
 				E1B22F5A2A821E4A009DDFCB /* TourismDetailVC.swift in Sources */,
 				E13BFE662A845D700097CEB0 /* GoalNewTripVC.swift in Sources */,
 				E1B22F582A821DD3009DDFCB /* TourismRunningVC.swift in Sources */,
 				E13BFE642A845D700097CEB0 /* GoalCountVC.swift in Sources */,
+				E1B5E4142AC8FD6F006E57D3 /* NetworkMonitor.swift in Sources */,
 				E13BFE6B2A84B2C00097CEB0 /* OtherHosts.swift in Sources */,
 				E147B2142A87ACB900D1D7D8 /* AlertHost.swift in Sources */,
 				E13BFE692A8465D80097CEB0 /* siginupVC.swift in Sources */,
@@ -570,6 +582,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -630,6 +643,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -687,7 +701,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Turip/Turip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = AX9FAU44AC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Turip/Info.plist;
@@ -728,7 +742,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Turip/Turip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = AX9FAU44AC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Turip/Info.plist;

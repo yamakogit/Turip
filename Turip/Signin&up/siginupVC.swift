@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class signupViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var mailTF: UITextField!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var passTF: UITextField!
@@ -26,7 +26,7 @@ class signupViewController: UIViewController, UITextFieldDelegate {
         
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-
+        
         let tfArray = [mailTF,nameTF,passTF]
         for tf in 0...2 {
             let electedTf = tfArray[tf]
@@ -43,21 +43,27 @@ class signupViewController: UIViewController, UITextFieldDelegate {
         date = dateFormatter.string(from: Date())
         
         //Placeholder設定(文字と色)
-        mailTF.attributedPlaceholder = NSAttributedString(string: "Enter MailAdress...",
-                                                          attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
-        nameTF.attributedPlaceholder = NSAttributedString(string: "Enter UserName...",
-                                                          attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
-        passTF.attributedPlaceholder = NSAttributedString(string: "Enter Password...",
-                                                          attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
+        setTFAttributed(mailTF, kind: "MailAdress")
+        setTFAttributed(nameTF, kind: "UserName")
+        setTFAttributed(passTF, kind: "Password")
+        
+        UserDefaults.standard.set(19, forKey: "tripHour") //TripHourの初期設定
+        UserDefaults.standard.set("OK", forKey: "tripHourChecker") //旧バージョン対応
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func setTFAttributed(_ tf: UITextField, kind: String) {
+        tf.attributedPlaceholder = NSAttributedString(string: "Enter \(kind)...",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: Asset.colorGray.color])
     }
     
     
     //TF
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() //キーボードを閉じる
-        return true //戻り値
+        return true
     }
     
     
@@ -102,30 +108,20 @@ class signupViewController: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser (withEmail: mailAdress, password: password) {
                 authResult, error in
                 print("succeed: signup_createUser")
-                if let user = authResult?.user { // authResult?.userでuidが
+                if let user = authResult?.user { // authResult?.userでuid取得
                     OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
-                    print(user)
-                    
                     
                     Task {
                         do {
-//                            try await FirebaseClient.shared.saveLatestOpenedDatetoUser()
                             try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: ["lat": "35.675079", "lng": "139.759599"], name: self.userName)
-                            DispatchQueue.main.async {
-                                print("全登録作業完了")
-                                
-                                //MARK: 遷移
-                                let tutorialPageVC = TutorialPageViewController()
-                                tutorialPageVC.comeFrom = "signup"
-                                self.navigationController?.pushViewController(tutorialPageVC, animated: true)
-                                
-                                dump(user)
-                            }
+                            dump(user)
+                            //MARK: 遷移
+                            let tutorialPageVC = TutorialPageViewController()
+                            tutorialPageVC.comeFrom = "signup"
+                            self.navigationController?.pushViewController(tutorialPageVC, animated: true)
                             
                         } catch {
                             print("Error fetching spot data5/6: \(error)")
-                            DispatchQueue.main.async {
-                            }
                         }
                     }
                     
@@ -144,15 +140,15 @@ class signupViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

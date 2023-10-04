@@ -19,12 +19,10 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
         photoImageView.layer.cornerRadius = 10
         photoImageView.clipsToBounds = true
         
         photoImageView.image = photo
-        
     }
     
     

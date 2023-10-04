@@ -16,7 +16,7 @@ class OtherHosts {
     let healthStore = HKHealthStore()
     var stepsInt = 0
     
-
+    //activityIndicatorView
     static func activityIndicatorView(view:UIView) -> UIActivityIndicatorView {
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.center = view.center
@@ -34,12 +34,14 @@ class OtherHosts {
         let photoCLLocation = CLLocation(latitude: lat, longitude: lng)
         
         do {
-            let placemarks = try await geocoder.reverseGeocodeLocation(photoCLLocation)
+            
+            let placemarks = try await geocoder.reverseGeocodeLocation(photoCLLocation, preferredLocale: Locale(identifier: "ja_JP"))
             
             if let placemark = placemarks.first {
                 if let prefecture = placemark.administrativeArea, let locality = placemark.locality {
 //                    let address = "\(prefecture)\(locality)" //市区町村
                     let address = "\(prefecture)" //都道府県
+                    
                     return address
                 }
             }
@@ -98,8 +100,16 @@ class OtherHosts {
     }
     
     
+    //coordinate変換
+    func conversionCoordinate(_ dict: [String:String]) -> CLLocationCoordinate2D {
+        let currentCoordinateLat = dict["lat"]
+        let currentCoordinateLng = dict["lng"]
+        let currentCoordinate2D = CLLocationCoordinate2D(latitude: Double(currentCoordinateLat!)!, longitude: Double(currentCoordinateLng!)!)
+        return currentCoordinate2D
+    }
     
     
+    //タイム計算
     static func timeCalsulate(secondsCount: Int) -> TimeSetString {
         var timeSetInt: TimeSetInt = TimeSetInt()
         var timeSetString: TimeSetString = TimeSetString()

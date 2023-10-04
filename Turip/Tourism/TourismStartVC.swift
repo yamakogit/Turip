@@ -27,6 +27,9 @@ class TourismStartViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         mapView.isUserInteractionEnabled = false
         
+        NotificationClient.shared.deleteTourNotification()
+        
+        
     }
     
     
@@ -41,7 +44,7 @@ class TourismStartViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func tapStart() {
-        self.performSegue(withIdentifier: "startTourism", sender: self)
+        self.performSegue(withIdentifier: "selectTime", sender: self)
     }
     
     

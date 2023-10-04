@@ -151,7 +151,6 @@ class FirebaseClient {
     func saveSpotDatatoUser(spotUID: String, date: String, type: String) async throws {
         
         var userData = try await getUserData()
-        print(userData)
         let oneSpotData = ["UID": spotUID, "date": date, "type": type]
         userData.spots?.append(oneSpotData)
         let docRef = db.collection("User").document(userUid)
@@ -223,22 +222,24 @@ class FirebaseClient {
     
     
     //URLよりStorageから写真の取得
-    func getSpotImage(url: String, completion: @escaping (UIImage?) -> Void) {
-        let imageURL: URL = URL(string:url)!
-        KingfisherManager.shared.downloader.downloadImage(with: imageURL) { result in
-            switch result {
-            case .success(let value):
-                completion(value.image)
-            case .failure(let error):
-                print(error)
-                completion(nil)
+    func getSpotImage(url: String) async throws -> UIImage? {
+        let imageURL: URL = URL(string: url)!
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            KingfisherManager.shared.downloader.downloadImage(with: imageURL) { result in
+                switch result {
+                case .success(let value):
+                    continuation.resume(returning: value.image)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
             }
         }
     }
     
     
     //Storageへ写真の保存 & URLのRETURN
-    func saveSpotImage(spotImage: UIImage, completion: @escaping (String) -> Void) {
+    func saveSpotImage(spotImage: UIImage) async throws -> String {
         
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("spotImages")
@@ -248,26 +249,14 @@ class FirebaseClient {
         if let imageData = spotImage.jpegData(compressionQuality: 0.5) {
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-            
-            imageRef.putData(imageData, metadata: metadata) { metadata, error in
-                if let error = error {
-                    print("Error uploading image: \(error)")
-                } else {
-                    print("Image uploaded successfully!")
-                    
-                    imageRef.downloadURL { url, error in
-                        if let downloadURL = url {
-                            print("Download URL: \(downloadURL)")
-                            let urlString = "\(downloadURL)"
-                            completion(urlString)
-                        } else {
-                            print("Error getting download URL: \(error?.localizedDescription ?? "")")
-                            completion("unknown")
-                        }
-                    }
-                }
-            }
+            try await imageRef.putDataAsync(imageData, metadata: metadata)
+            let url: URL = try await imageRef.downloadURL()
+            let urlStr: String = url.absoluteString
+            return urlStr
+        } else {
+            return "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b"
         }
+        
     }
     
     

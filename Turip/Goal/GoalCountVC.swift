@@ -41,7 +41,7 @@ class GoalCountViewController: UIViewController {
                     var count = 0
                     var pregoalUID = ""
                     
-                    while (distance >= 200000 && count <= 40) || pregoalUID == self.nextGoalUID  { //ゴールが現在地から200km以内になるまで
+                    while (distance >= 200000 && count <= 80) || pregoalUID == self.nextGoalUID  { //ゴールが現在地から200km以内になるまで (問い合わせ80回まで)
                         
                         //NextGoalの設定
                         self.nextGoalUID = randomElement
@@ -53,15 +53,12 @@ class GoalCountViewController: UIViewController {
                             do {
                                 let userData = try await FirebaseClient.shared.getUserData()
                                 let spotData = try await FirebaseClient.shared.getSpotData(spotUID: self.nextGoalUID) //新ゴール候補のデータ取得
-                                DispatchQueue.main.async {
                                     
                                     distance = MapClient.calculateDistance(startCoordinateDict: userData.currentCoordinate!, endCoordinateDict: spotData.coordinate!)
                                     pregoalUID = userData.goalUID!
-                                    
-                                }
                                 
                             } catch {
-                                
+                                print("エラー")
                             }
                         }
                         
@@ -70,13 +67,10 @@ class GoalCountViewController: UIViewController {
                     Task {
                         do {
                             try await FirebaseClient.shared.saveUserDatas(goalUID: self.nextGoalUID) //新ゴールのUID保存
-                            DispatchQueue.main.async {
                                 print("saveNewGoal完了")
-                            }
                             
                         } catch {
-                            DispatchQueue.main.async {
-                            }
+                            print("エラー")
                         }
                     }
                     
@@ -94,6 +88,7 @@ class GoalCountViewController: UIViewController {
     
     func updatetimeUI() {
        if secondsCount == 0 {
+           timer?.invalidate()
            performSegue(withIdentifier: "goNext", sender: self)
            
        } else {

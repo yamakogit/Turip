@@ -17,8 +17,6 @@ class LookBackStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //MARK: Health
-        
         UserDefaults.standard.removeObject(forKey: "todaySteps")
         UserDefaults.standard.removeObject(forKey: "calculatedDistance")
         UserDefaults.standard.removeObject(forKey: "goalUID")
@@ -26,7 +24,6 @@ class LookBackStepViewController: UIViewController {
         
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
         
         OtherHosts.shared.requestAuthorization { stepsInt, error in
             if let error = error {
@@ -40,27 +37,15 @@ class LookBackStepViewController: UIViewController {
             }
         }
         
-        
-        
         Task {
             do {
-                
                 try await FirebaseClient.shared.saveLatestOpenedDatetoUser()
-                DispatchQueue.main.async {
-                    print("latestOpenedDate保存完了")
-                    
-                }
                 
             } catch {
                 print("Error fetching spot data5/6: \(error)")
-                DispatchQueue.main.async {
-                    
-                }
             }
         }
         
-        
-
         // Do any additional setup after loading the view.
     }
     
@@ -73,8 +58,12 @@ class LookBackStepViewController: UIViewController {
     func setGlaf() {
         var glafRaito: Int = stepsInt / 80
         glafRaito = (glafRaito + 9) / 10
-        if glafRaito > 10 {
-            glafRaito = 10
+        if glafRaito >= 10  {
+            if stepsInt < 8000 {
+                glafRaito = 9
+            } else {
+                glafRaito = 10
+            }
         }
         print("glafRaito: \(glafRaito)")
         stepGlaph.image = UIImage(named: "glaf_\(glafRaito)")

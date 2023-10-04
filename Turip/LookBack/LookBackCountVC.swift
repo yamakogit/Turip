@@ -91,6 +91,7 @@ class LookBackCountViewController: UIViewController {
     
     func updatetimeUI() {
        if secondsCount == 0 {
+           timer?.invalidate()
            performSegue(withIdentifier: "goNext", sender: self)
            
        } else {

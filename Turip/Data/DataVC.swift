@@ -101,74 +101,78 @@ class DataViewController: UIViewController {
                 
                 do {
                     let latestTourismSpotData = try await FirebaseClient.shared.getSpotData(spotUID: latestTourismSpot["UID"] ?? "") //MARK: UID, date, type
-                    
                     let latestTripSpotData = try await FirebaseClient.shared.getSpotData(spotUID: latestTripSpot["UID"] ?? "")
                     
+                    self.tourDateLabel.text = latestTourismSpot["date"]
+                    self.tourSpotNameTF.text = latestTourismSpotData.name
+                    self.tourSpotPlaceTF.text = latestTourismSpotData.place
+                    self.tourSpotDetailTV.text = latestTourismSpotData.detail
                     
-                    DispatchQueue.main.async {
-                        self.tourDateLabel.text = latestTourismSpot["date"]
-                        self.tourSpotNameTF.text = latestTourismSpotData.name
-                        self.tourSpotPlaceTF.text = latestTourismSpotData.place
-                        self.tourSpotDetailTV.text = latestTourismSpotData.detail
-                        
-                        self.tripDateLabel.text = latestTripSpot["date"]
-                        self.tripSpotNameTF.text = latestTripSpotData.name
-                        self.tripSpotPlaceTF.text = latestTripSpotData.place
-                        self.tripSpotDetailTV.text = latestTripSpotData.detail
-                        
-                        self.tripPlaceNumbers.text = "\(spotsCount.trip)"
-                        self.tourPlaceNumbers.text = "\(spotsCount.tourism)"
-                        
-                        //Imageの取得・表示
-                        FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-                            if let image = image {
-                                DispatchQueue.main.async {
-                                    self?.tripImage.image = image
-                                    self?.tripPhoto = image
-                                }
-                            }
-                        }
-                        
-                        FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-                            if let image = image {
-                                DispatchQueue.main.async {
-                                    self?.tourImage.image = image
-                                    self?.tourPhoto = image
-                                }
-                            }
-                        }
-                        
-                    }
+                    self.tripDateLabel.text = latestTripSpot["date"]
+                    self.tripSpotNameTF.text = latestTripSpotData.name
+                    self.tripSpotPlaceTF.text = latestTripSpotData.place
+                    self.tripSpotDetailTV.text = latestTripSpotData.detail
+                    
+                    self.tripPlaceNumbers.text = "\(spotsCount.trip)"
+                    self.tourPlaceNumbers.text = "\(spotsCount.tourism)"
+                    
+                    //Imageの取得・表示
+//                    FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//                        if let image = image {
+//                            DispatchQueue.main.async {
+//                                self?.tripImage.image = image
+//                                self?.tripPhoto = image
+//                            }
+//                        }
+//                    }
+//                    
+//                    
+//                    
+//                    FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//                        if let image = image {
+//                            DispatchQueue.main.async {
+//                                self?.tourImage.image = image
+//                                self?.tourPhoto = image
+//                            }
+//                        }
+//                    }
+                    
+                    
+                    
+                    let tripImage2 = try await FirebaseClient().getSpotImage(url: latestTripSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                    self.tripImage.image = tripImage2
+                    self.tripPhoto = tripImage2
+                    
+                    let tourImage2 = try await FirebaseClient().getSpotImage(url: latestTourismSpotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                    self.tourImage.image = tourImage2
+                    self.tourPhoto = tourImage2
+                    
+                    
+                    
+                    
                 } catch {
                     print("Error fetching spot data5/6: \(error)")
-                    DispatchQueue.main.async {
-                        
-                        for ui in uiArray {
-                            if let ui2 = ui as? UITextField {
-                                ui2.text = "error:5"
-                            } else if let ui3 = ui as? UITextView {
-                                ui3.text = "error:5"
-                            }
+                    for ui in uiArray {
+                        if let ui2 = ui as? UITextField {
+                            ui2.text = "error:5"
+                        } else if let ui3 = ui as? UITextView {
+                            ui3.text = "error:5"
                         }
-        
-                        self.tourDateLabel.text = latestTourismSpot["date"]
-                        self.tripDateLabel.text = latestTripSpot["date"]
-                        
                     }
+                    self.tourDateLabel.text = latestTourismSpot["date"]
+                    self.tripDateLabel.text = latestTripSpot["date"]
                 }
             } catch {
                 print("Error fetching spot date7/8: \(error)")
-                DispatchQueue.main.async {
-                    for ui in uiArray {
-                        if let ui2 = ui as? UITextField {
-                            ui2.text = "error:6"
-                        } else if let ui3 = ui as? UITextView {
-                            ui3.text = "error:6"
-                        }
+                for ui in uiArray {
+                    if let ui2 = ui as? UITextField {
+                        ui2.text = "error:6"
+                    } else if let ui3 = ui as? UITextView {
+                        ui3.text = "error:6"
                     }
-                    self.tourDateLabel.text = "error:6"
-                    self.tripDateLabel.text = "error:6"
                 }
+                self.tourDateLabel.text = "error:6"
+                self.tripDateLabel.text = "error:6"
             }
         }
         
@@ -179,11 +183,14 @@ class DataViewController: UIViewController {
     //MARK: glaf
     func setGlaf() {
         var glafRaito: Int = stepsInt / 80
-        print("GLAFRAITO1\(glafRaito)")
         glafRaito = (glafRaito + 9) / 10
-        print("GLAFRAITO2:\(glafRaito)")
-        if glafRaito > 10 {
-            glafRaito = 10
+        print("GLAFRAITO:\(glafRaito)")
+        if glafRaito >= 10  {
+            if stepsInt < 8000 {
+                glafRaito = 9
+            } else {
+                glafRaito = 10
+            }
         }
         print("glafRaito: \(glafRaito)")
         stepGlaph.image = UIImage(named: "glaf_\(glafRaito)")
@@ -195,10 +202,12 @@ class DataViewController: UIViewController {
         performSegue(withIdentifier: "showPhoto", sender: self)
     }
     
+    
     @IBAction func showTourPhoto(_ sender: UIButton) {
         photo = tourPhoto
         performSegue(withIdentifier: "showPhoto", sender: self)
     }
+    
     
     //MARK: SEGUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -209,15 +218,15 @@ class DataViewController: UIViewController {
     }
     
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -52,18 +52,27 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         spotDetailTV.delegate = self
         
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         let nowDate = dateFormatter.string(from: Date())
         assignedDate = date ?? nowDate
         
         //Imageの取得・表示
-        FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-            if let image = image {
-                DispatchQueue.main.async {
-                    self?.spotImage.image = image
-                }
+//        FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//            if let image = image {
+//                DispatchQueue.main.async {
+//                    self?.spotImage.image = image
+//                }
+//            }
+//        }
+        
+        Task {
+            do {
+                let spotImage = try await FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                self.spotImage.image = spotImage
+                
+            } catch {
+                print("エラー")
             }
         }
             
@@ -82,25 +91,21 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        NotificationClient.shared.deleteTourNotification()
         
-        if leafType == "3" {
-            //赤
+        if leafType == "3" { //赤
             uiSetting(isEnabled: true)
             leafImage.image = Asset.leafRed.image
             
-        } else if leafType == "2" {
-            //黄
+        } else if leafType == "2" { //黄
             uiSetting(isEnabled: false)
             leafImage.image = Asset.leafYellow.image
             
-        } else {
-            //緑
+        } else { //緑
             uiSetting(isEnabled: false)
             leafImage.image = Asset.leafLightGreen.image
         }
         
-        
-        // Do any additional setup after loading the view.
     }
     
     //TF

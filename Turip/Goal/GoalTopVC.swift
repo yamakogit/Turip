@@ -21,7 +21,7 @@ class GoalTopViewController: UIViewController {
     var date = ""
     var goalUID = ""
     var goalPlace = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,48 +49,32 @@ class GoalTopViewController: UIViewController {
                 
                 let goalData = try await FirebaseClient.shared.getGoalData()
                 
-                DispatchQueue.main.async {
-                    
-                    self.goalUID = goalData.id ?? ""
-                    self.goalPlace = goalData.place ?? ""
-                    
-                    self.dateLabel.text = self.date
-                    self.spotNameTF.text = goalData.name
-                    self.spotPlaceTF.text = goalData.place
-                    self.spotDetailTV.text = goalData.detail
-                    
-                    
-                    Task {
-                        do {
-                            
-                            try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: goalData.coordinate!) //現在地の更新
-                            DispatchQueue.main.async {
-                                print("現在地更新保存完了")
-                            }
-                            
-                        } catch {
-                            print("Error fetching spot data5/6: \(error)")
-                        }
-                    }
-                    
-                    
-                }
+                self.goalUID = goalData.id ?? ""
+                self.goalPlace = goalData.place ?? ""
+                self.dateLabel.text = self.date
+                self.spotNameTF.text = goalData.name
+                self.spotPlaceTF.text = goalData.place
+                self.spotDetailTV.text = goalData.detail
+                
+                try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: goalData.coordinate!) //現在地の更新
+                
+                let spotImage = try await FirebaseClient().getSpotImage(url: goalData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                self.spotImage.image = spotImage
                 
                 //Imageの取得・表示
-                FirebaseClient().getSpotImage(url: goalData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-                    if let image = image {
-                        DispatchQueue.main.async {
-                            self?.spotImage.image = image
-                        }
-                    }
-                }
+//                FirebaseClient().getSpotImage(url: goalData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//                    if let image = image {
+//                        DispatchQueue.main.async {
+//                            self?.spotImage.image = image
+//                        }
+//                    }
+//                }
+                
+                
+                
                 
             } catch {
                 print("Error fetching spot data5/6: \(error)")
-                DispatchQueue.main.async {
-                    //エラー
-                    
-                }
             }
             
         }
@@ -131,15 +115,15 @@ class GoalTopViewController: UIViewController {
         
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

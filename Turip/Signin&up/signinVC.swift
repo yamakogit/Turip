@@ -47,8 +47,8 @@ class signinViewController: UIViewController, UITextFieldDelegate {
         return true //戻り値
     }
     
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        
         if textField.tag == 0 {
             mailAdress = textField.text!
             print("mailAdress: \(mailAdress)")
@@ -61,7 +61,6 @@ class signinViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func login() {
-        
         //入力項目の確認...
         var confirmBool = true
         let confirmDict = ["メールアドレス":mailAdress,"パスワード":password]

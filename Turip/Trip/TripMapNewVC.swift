@@ -32,195 +32,84 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
         mapView.delegate = self
         
         Task {
             do {
-                
                 let userData = try await FirebaseClient.shared.getUserData()
+                print("userData取得完了")
+                let userAllSpotDatas = userData.spots
+                
+                if userAllSpotDatas != [] { //nilじゃないとき表示処理開始
+                    
+                    for n in 0...userAllSpotDatas!.count-1 {
                         
-                        DispatchQueue.main.async {
-                            print("userData取得完了")
-                            let userAllSpotDatas = userData.spots
+                        let electedSpotData = userAllSpotDatas?[n]
+                        let spotUid = electedSpotData?["UID"]
+                        
+                        do {
+                            let spotDataDetail = try await FirebaseClient.shared.getSpotData(spotUID: spotUid ?? "")
+                            print("spotDataDetail取得完了: \(n)")
                             
-                            if userAllSpotDatas != [] { //nilじゃないとき表示処理開始
+                            //緯度
+                            let spotCoordinateDict = spotDataDetail.coordinate
+                            let spotCoordinate2D = OtherHosts.shared.conversionCoordinate(spotCoordinateDict!)
+                            //String -> CLLocationCoordinate2D
+                            
+                            //月日の割り出し
+                            let dateSet = loadDate(stringDate: (electedSpotData?["date"])!)
+                            
+                            //葉っぱの色 表示調整
+                            let spotLeafType = electedSpotData?["type"]
+                            
+                            //写真の取得
+                            let spotPhotoURL = spotDataDetail.photoURL
+//                            FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//                                if let image = image {
+//                                    DispatchQueue.main.async {
+//                                        let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: dateSet.month, day: dateSet.day, imageName: image, leafType: spotLeafType ?? "1", date: dateSet.date, spotData: spotDataDetail)
+//                                        print("追加！")
+//                                        self?.mapView.addAnnotation(annotation)
+//                                    }
+//                                }
+//                            }
+                            
+                            do {
                                 
-                                for n in 0...userAllSpotDatas!.count-1 {
-                                    
-                                    let electedSpotData = userAllSpotDatas?[n]
-                                    let spotUid = electedSpotData?["UID"]
-                                    
-                                    Task {
-                                        do {
-                                            let spotDataDetail = try await FirebaseClient.shared.getSpotData(spotUID: spotUid ?? "")
-                                            
-                                            DispatchQueue.main.async {
-                                                print("spotDataDetail取得完了")
-                                                
-                                                //緯度
-                                                let spotCoordinateDict = spotDataDetail.coordinate
-                                                let spotCoordinateLat = spotCoordinateDict?["lat"]
-                                                let spotCoordinateLng = spotCoordinateDict?["lng"]
-                                                let spotCoordinate2D = CLLocationCoordinate2D(latitude: Double(spotCoordinateLat!)!, longitude: Double(spotCoordinateLng!)!) //String -> CLLocationCoordinate2D
-                                                
-                                                //月日の割り出し
-                                                let spotDateString = electedSpotData?["date"]
-                                                let dateFormatter = DateFormatter()
-                                                dateFormatter.dateFormat = "yyyy.MM.dd"
-                                                dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
-                                                //まずはDate型に↓
-                                                let spotDateDate = dateFormatter.date(from: spotDateString!)
-                                                //そこからStringで月・日をそれぞれ取得
-                                                dateFormatter.dateFormat = "M"
-                                                let month = dateFormatter.string(from: spotDateDate!)
-                                                dateFormatter.dateFormat = "d"
-                                                let day = dateFormatter.string(from: spotDateDate!)
-                                                
-                                                
-                                                //葉っぱの色 表示調整
-                                                let spotLeafType = electedSpotData?["type"]
-                                                
-                                                print("ピン表示処理中:\(n)")
-                                                
-                                                //写真の取得
-                                                let spotPhotoURL = spotDataDetail.photoURL
-                                                FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-                                                    if let image = image {
-                                                        DispatchQueue.main.async {
-                                                            let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: month, day: day, imageName: image, leafType: spotLeafType ?? "1", date: spotDateString!, spotData: spotDataDetail)
-                                                            print("追加！")
-                                                            self?.mapView.addAnnotation(annotation)
-                                                        }
-                                                    }
-                                                }
-                                                
-                                            }
-                                            
-                                            
-                                        } catch {
-                                            print("Error fetching spot data5/6: \(error)")
-                                            //エラー
-                                        }
-                                    }
-                                    
-                                    
-                                }
+                                let image = try await FirebaseClient().getSpotImage(url: spotPhotoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                                let annotation = CustomAnnotation(coordinate: spotCoordinate2D, month: dateSet.month, day: dateSet.day, imageName: image!, leafType: spotLeafType ?? "1", date: dateSet.date, spotData: spotDataDetail)
+                                self.mapView.addAnnotation(annotation)
+                                print("追加！")
                             }
+                            
+                        } catch {
+                            print("スポットエラー: \(error)") //エラー
                         }
-        } catch {
-            print("Error fetching spot data5/6: \(error)")
-            //エラー
-        }
-    }
-
-        //ゴール関連
-        Task {
-            do {
-                
-                let userData = try await FirebaseClient.shared.getUserData()
-                let goalData = try await FirebaseClient.shared.getGoalData()
-                try await FirebaseClient.shared.getUserUid()
-                
-                DispatchQueue.main.async {
-                    
-                    print("UIII")
-                    
-                    //ゴールの表示
-                    self.spotName = goalData.name ?? "- - - -"
-                    self.spotAdress = goalData.place ?? "- - - -"
-                    self.remainingSteps = userData.remainingSteps ?? "- - - -"
-                    
-                    self.spotNameLabel.text = self.spotName
-                    self.spotAdressLabel.text = "📍\(self.spotAdress)"
-                    self.remainingStepsLabel.text = "「目的地まであと \(self.remainingSteps)歩」"
-                    
-                    
-                    //ゴールとスタートと現在地のAnnotation追加
-                    //ゴール
-                    self.addTextAnnotation(coordinateDict: goalData.coordinate!, image: Asset.goal.image, type: "2")
-                    //スタート
-                    self.addTextAnnotation(coordinateDict: userData.startCoordinate!, image: Asset.start.image, type: "1")
-                    //現在地
-                    self.addTextAnnotation(coordinateDict: userData.currentCoordinate!, image: Asset.currentPlace.image, type: "1")
-                    
-                    
-                    //経路の表示（黄色ライン）
-                    //このTourismのスタート地点
-                    let startCoordinateDict = userData.startCoordinate
-                    let startCoordinateLat = startCoordinateDict?["lat"]
-                    let startCoordinateLng = startCoordinateDict?["lng"]
-                    let startCoordinate2D = CLLocationCoordinate2D(latitude: Double(startCoordinateLat!)!, longitude: Double(startCoordinateLng!)!) //CLLocationCoordinate2Dに変換
-                    //Tourismの現在地
-                    let currentCoordinateDict = userData.currentCoordinate
-                    let currentCoordinateLat = currentCoordinateDict?["lat"]
-                    let currentCoordinateLng = currentCoordinateDict?["lng"]
-                    let currentCoordinate2D = CLLocationCoordinate2D(latitude: Double(currentCoordinateLat!)!, longitude: Double(currentCoordinateLng!)!)
-                    //ラインの追加
-                    let linecoordinates = [startCoordinate2D, currentCoordinate2D]
-                    let polyline = MKPolyline(coordinates: linecoordinates, count: linecoordinates.count)
-                    self.mapView.addOverlay(polyline)
-                    
+                        
+                    }
                 }
+                
+                let goalData = try await FirebaseClient.shared.getGoalData()
+                setGoalAnnotation(userData: userData, goalData: goalData)
                 
             } catch {
-                print("Error fetching spot data5/6: \(error)")
-                DispatchQueue.main.async {
-                    //エラー
-                    AlertHost.alertDef(view: self ,title: "エラー", message: "Goalの取得に失敗しました。")
-                }
+                print("Error fetching spot data5/6: \(error)") //エラー
             }
-            
         }
         
+        //旧バージョン対応
+        let tripHourChecker = UserDefaults.standard.string(forKey: "tripHourChecker")
+        if tripHourChecker == nil {
+            UserDefaults.standard.set(19, forKey: "tripHour")
+            UserDefaults.standard.set("OK", forKey: "tripHourChecker")
+        }
         
         //MARK: 通知
-        //通知許可の取得を求める
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert, .sound, .badge]){
-                (granted, _) in
-                if granted{
-                    print("granted 通知")
-                    UNUserNotificationCenter.current().delegate = self
-                }
-            }
-        
-        let unc = UNUserNotificationCenter.current()  //設定済の通知の全削除
-        unc.removeAllPendingNotificationRequests()  //設定済の通知の全削除
-        
-        
-        let content = UNMutableNotificationContent()
-        content.title = "今日のTrip"
-        content.body = "Turipで今日1日のヘルスケアを振り返り、\nSpotを獲得しよう"
-        
-        // Configure the recurring date.
-        var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
-
-        dateComponents.hour = 19    // 19:00に設定
-           
-        // Create the trigger as a repeating event.
-        let trigger = UNCalendarNotificationTrigger(
-                 dateMatching: dateComponents, repeats: true)
-        
-        // Create the request
-        let uuidString = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuidString,
-                    content: content, trigger: trigger)
-
-        // Schedule the request with the system.
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { (error) in
-           if error != nil {
-              // Handle any errors.
-                print("通知エラー")
-           } else {
-               print("通知設定完了")
-           }
-        }
-        
+        setNotification()
         
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
@@ -228,13 +117,9 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
     
     
     func addTextAnnotation(coordinateDict: [String:String], image: UIImage, type: String){
-        
-        let coordinateLat = coordinateDict["lat"]
-        let coordinateLng = coordinateDict["lng"]
-        let coordinate2D = CLLocationCoordinate2D(latitude: Double(coordinateLat!)!, longitude: Double(coordinateLng!)!)
+        let coordinate2D = OtherHosts.shared.conversionCoordinate(coordinateDict)
         let annotation = CustomAnnotation(coordinate: coordinate2D, month: "0", day: "0", imageName: image, leafType: type, date: "0", spotData: FirebaseClient.SpotDataSet())
         mapView.addAnnotation(annotation)
-        
     }
     
     
@@ -245,7 +130,6 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
         }
         
         let identifier = "CustomAnnotationView\(key)"
-        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) //annotationView再利用
         
         if annotationView == nil {
@@ -254,7 +138,6 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
         } else {
             annotationView?.annotation = customAnnotation
         }
-        
         
         if let customView = Bundle.main.loadNibNamed("CustomView", owner: self, options: nil)?.first as? CustomViewVC {
             
@@ -272,7 +155,6 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
                 
             } else {
                 setCustomViewUI(false)
-                
                 customView.monthLabel.text = customAnnotation.month
                 customView.dayLabel.text = customAnnotation.day
                 customView.button2.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -309,6 +191,7 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
         return annotationView
     }
     
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polylineOverlay = overlay as? MKPolyline {
             let renderer = MKPolylineRenderer(overlay: polylineOverlay)
@@ -322,22 +205,20 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
     
     @objc func buttonTapped(_ sender: UIButton) {
         // カスタムビュー内のボタンがタップされたときの処理
-           
+        
         if let customView = sender.superview as? CustomViewVC,
            let annotationView = customView.superview as? MKAnnotationView,
            let customAnnotation = annotationView.annotation as? CustomAnnotation {
-            
             print("タップ！")
+            
             leafType123 = customAnnotation.leafType
             date123 = customAnnotation.date
             spotData123 = customAnnotation.spotData
             
-            if leafType123 == "3" {
-                //赤
+            if leafType123 == "3" { //赤
                 performSegue(withIdentifier: "show3SpotDetail", sender: self)
                 
-            } else {
-                //黄・緑
+            } else { //黄・緑
                 performSegue(withIdentifier: "show12SpotDetail", sender: self)
             }
         }
@@ -350,19 +231,87 @@ class TripMapNewViewController: UIViewController, MKMapViewDelegate, UNUserNotif
             spotVC.spotData = spotData123
             spotVC.leafType = leafType123
             spotVC.date = date123
-        } else if segue.identifier == "show3SpotDetail" {
             
+        } else if segue.identifier == "show3SpotDetail" {
             let tourismDetailVC = segue.destination as! TourismDetailViewController
             tourismDetailVC.spotData = spotData123
             tourismDetailVC.date = date123
         }
     }
     
+    
     @IBAction func goTutorial() {
         //MARK: 遷移
         let tutorialPageVC = TutorialPageViewController()
         tutorialPageVC.comeFrom = "trip"
         self.present(tutorialPageVC, animated: true, completion: nil)
+    }
+    
+    
+    func setNotification() {
+        NotificationClient.shared.requestNotification(self) //許可を求める
+        NotificationClient.shared.deleteAllNotification()  //設定済の通知の全削除
+        
+        let tripHour = UserDefaults.standard.integer(forKey: "tripHour")
+        NotificationClient.shared.setNotification(title: "今日のTrip", message: "Turipで今日1日のヘルスケアを振り返り、\nSpotを獲得しよう", hour: tripHour)
+        
+        var spurtHour = tripHour - 1
+        if spurtHour < 0 {
+            spurtHour = 23
+        }
+        NotificationClient.shared.setNotification(title: "ラストスパート！", message: "今日のTripまであと1時間！\n目標「1日8000歩」まであと何歩？\nTuripで今日の歩数を確認しよう", hour: spurtHour)
+    }
+    
+    
+    func setGoalAnnotation(userData: FirebaseClient.UserDataSet, goalData:  FirebaseClient.SpotDataSet) {
+        
+        //ゴールの表示
+        self.spotName = goalData.name ?? "- - - -"
+        self.spotAdress = goalData.place ?? "- - - -"
+        self.remainingSteps = userData.remainingSteps ?? "- - - -"
+        
+        self.spotNameLabel.text = self.spotName
+        self.spotAdressLabel.text = "📍\(self.spotAdress)"
+        self.remainingStepsLabel.text = "「目的地まであと \(self.remainingSteps)歩」"
+        
+        //ゴール / スタート / 現在地のAnnotation追加
+        self.addTextAnnotation(coordinateDict: goalData.coordinate!, image: Asset.goal.image, type: "2")
+        self.addTextAnnotation(coordinateDict: userData.startCoordinate!, image: Asset.start.image, type: "1")
+        self.addTextAnnotation(coordinateDict: userData.currentCoordinate!, image: Asset.currentPlace.image, type: "1")
+        
+        //経路の表示（黄色ライン）
+        let startCoordinateDict = userData.startCoordinate  //このTourismのスタート地点
+        let startCoordinate2D = OtherHosts.shared.conversionCoordinate(startCoordinateDict!)
+        let currentCoordinateDict = userData.currentCoordinate //Tourismの現在地
+        let currentCoordinate2D = OtherHosts.shared.conversionCoordinate(currentCoordinateDict!)
+        
+        //ラインの追加
+        let linecoordinates = [startCoordinate2D, currentCoordinate2D]
+        let polyline = MKPolyline(coordinates: linecoordinates, count: linecoordinates.count)
+        self.mapView.addOverlay(polyline)
+        
+    }
+    
+    
+    func loadDate(stringDate: String) -> dateStructure {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        let spotDateString = stringDate
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let spotDateDate = dateFormatter.date(from: spotDateString) //Date型に
+        dateFormatter.dateFormat = "M" //Stringで月・日をそれぞれ取得
+        let month = dateFormatter.string(from: spotDateDate!)
+        dateFormatter.dateFormat = "d"
+        let day = dateFormatter.string(from: spotDateDate!)
+        let dateStructure = dateStructure(month: month, day: day, date: spotDateString)
+        
+        return dateStructure
+    }
+    
+    struct dateStructure {
+        var month: String
+        var day: String
+        var date: String
     }
     
 }

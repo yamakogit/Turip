@@ -8,7 +8,7 @@
 import UIKit
 
 class LookBackSpotViewController: UIViewController {
-
+    
     @IBOutlet weak var spotImage: UIImageView!
     @IBOutlet weak var leafImage: UIImageView!
     
@@ -52,35 +52,31 @@ class LookBackSpotViewController: UIViewController {
             do {
                 
                 let spotData = try await FirebaseClient.shared.getSpotData(spotUID: spotUID)
-                DispatchQueue.main.async {
-                    
-                    self.dateLabel.text = date
-                    self.spotNameTF.text = spotData.name
-                    self.spotPlaceTF.text = spotData.place
-                    self.spotDetailTV.text = spotData.detail
-                    
-                    //Imageの取得・表示
-                    FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
-                        if let image = image {
-                            DispatchQueue.main.async {
-                                self?.spotImage.image = image
-                            }
-                        }
-                    }
-                    
-                }
                 
+                self.dateLabel.text = date
+                self.spotNameTF.text = spotData.name
+                self.spotPlaceTF.text = spotData.place
+                self.spotDetailTV.text = spotData.detail
+                
+                //Imageの取得・表示
+//                FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b") { [weak self] image in
+//                    if let image = image {
+//                        DispatchQueue.main.async {
+//                            self?.spotImage.image = image
+//                        }
+//                    }
+//                }
+                
+                let image = try await FirebaseClient().getSpotImage(url: spotData.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/turip-ee2b3.appspot.com/o/spotImages%2FNoneImage.png?alt=media&token=09339f8e-ab1d-4c59-b1a3-02a00840ad4b")
+                self.spotImage.image = image
                 
             } catch {
                 print("Error fetching spot data5/6: \(error)")
-                DispatchQueue.main.async {
-                    //エラー
-                }
             }
             
         }
         
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -101,13 +97,13 @@ class LookBackSpotViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

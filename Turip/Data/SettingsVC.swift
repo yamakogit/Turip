@@ -13,31 +13,50 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
 
+    @IBOutlet weak var tripTimeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Task {
             do {
                 let userData = try await FirebaseClient.shared.getUserData()
+                let tripHour = UserDefaults.standard.integer(forKey: "tripHour")
                 
-                DispatchQueue.main.async {
                     let userName = userData.name
                     self.userNameLabel.text = userName
-                }
+                    self.tripTimeLabel.text = "\(tripHour) 時"
                 
             } catch {
-                print("Error fetching spot data: \(error)")
-                DispatchQueue.main.async {
-                    //失敗
+                print("Error fetching spot data: \(error)") //失敗
+            }
+        }
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func editTripTime() {
+     
+        AlertHost.alertTF(view: self, alertTitle: "Tripの開始時間を設定", alertMessage: "開始時間になると通知が届き、\nアプリを開くとTripが始まります。", tfPlaceText: "0~23のいずれかを入力...", b1Title: "設定", b1Style: .default, b2Title: "キャンセル") { (_, inputText) in
+            
+            let hour = Int(inputText ?? "25")
+            if hour ?? 25 < 0 || hour ?? 25 > 23 { //エラー
+                AlertHost.alertDef(view: self, title: "エラー", message: "0~23の整数値を入力してください")
+                
+            } else {
+                UserDefaults.standard.set(hour, forKey: "tripHour")
+                AlertHost.alertDef(view: self, title: "設定完了", message: "Tripの開始時刻を\(hour!)時に設定しました。") { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
         
-        // Do any additional setup after loading the view.
+        
+        
     }
     
+    
     @IBAction func logout() {
-        
         
         AlertHost.alertDoubleDef(view: self, alertTitle: "ログアウトしますか？", alertMessage: "一度ログアウトすると、\n再ログインするまで使用できません。", b1Title: "ログアウト", b1Style: .destructive, b2Title: "キャンセル") { _ in
             
@@ -50,10 +69,8 @@ class SettingsViewController: UIViewController {
                 OtherHosts.activityIndicatorView(view: self.view).stopAnimating()
                 AlertHost.alertDef(view: self, title: "ログアウト完了", message: "トップページへ戻ります") { _ in
                     
-                    UserDefaults.standard.removeObject(forKey: "todaySteps")
-                    UserDefaults.standard.removeObject(forKey: "calculatedDistance")
-                    UserDefaults.standard.removeObject(forKey: "goalUID")
-                    UserDefaults.standard.removeObject(forKey: "newCoordinate")
+                    let appDomain = Bundle.main.bundleIdentifier
+                    UserDefaults.standard.removePersistentDomain(forName: appDomain!)
                     
                     guard let window = UIApplication.shared.keyWindow else { return }
                     let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -74,8 +91,6 @@ class SettingsViewController: UIViewController {
                 AlertHost.alertDef(view:self, title: "エラー", message: "ログアウトに失敗しました")
             }
         }
-        
-        
     }
     
     @IBAction func deleteAccount() {
@@ -84,10 +99,9 @@ class SettingsViewController: UIViewController {
                 
                 OtherHosts.activityIndicatorView(view: self.view).startAnimating()
                 
-                UserDefaults.standard.removeObject(forKey: "todaySteps")
-                UserDefaults.standard.removeObject(forKey: "calculatedDistance")
-                UserDefaults.standard.removeObject(forKey: "goalUID")
-                UserDefaults.standard.removeObject(forKey: "newCoordinate")
+                //UD ALL削除
+                let appDomain = Bundle.main.bundleIdentifier
+                UserDefaults.standard.removePersistentDomain(forName: appDomain!)
                 
                 let user = Auth.auth().currentUser
                 user?.delete { error in

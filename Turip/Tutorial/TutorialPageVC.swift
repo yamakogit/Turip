@@ -21,20 +21,15 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if comeFrom == "signup" {
-//            inst1-10, instFin
-            setPage(from: 1, to: 11) //メソッドの呼び出し
+        if comeFrom == "signup" {  //inst1-10, instFin
+            setPage(from: 1, to: 11)
             
-        } else if comeFrom == "trip" {
-//            inst2-7
+        } else if comeFrom == "trip" {  //inst2-7
             setPage(from: 2, to: 7)
             
-        } else if comeFrom == "tour" {
-//            inst8-10
+        } else if comeFrom == "tour" {  //inst8-10
             setPage(from: 8, to: 10)
         }
-        
         
         self.dataSource = self
         self.delegate = self
@@ -60,9 +55,7 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerData
     //前ページの取得
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllerList.firstIndex(of: viewController) else { return nil } //現在のVC取得
-        
         let prevIndex = index - 1
-        
         guard prevIndex >= 0 else { return nil } //1ページ目だったら-1となるのでnil
         
         return viewControllerList[prevIndex]
@@ -72,9 +65,7 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerData
     //後ページの取得
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllerList.firstIndex(of: viewController) else { return nil } //現在のVC取得
-        
         let nextIndex = index + 1
-        
         guard nextIndex < viewControllerList.count else { return nil }
         
         return viewControllerList[nextIndex]

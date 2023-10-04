@@ -43,7 +43,6 @@ class GoalNewTripViewController: UIViewController {
                 let goalSpotData = try await FirebaseClient.shared.getSpotData(spotUID: goalUID)
                 let userData = try await FirebaseClient.shared.getUserData()
                 
-                DispatchQueue.main.async {
                     self.spotNameTF.text = goalSpotData.name
                     self.spotPlaceTF.text = goalSpotData.place
                     
@@ -69,7 +68,6 @@ class GoalNewTripViewController: UIViewController {
                     
                     print("newCoordinate2: \(newUserLocation2 ?? ["!!":"値がないお2"])")
                     
-                    Task {
                         do {
                             
                             var startCoordinateDict = userData.startCoordinate
@@ -77,30 +75,21 @@ class GoalNewTripViewController: UIViewController {
                             if self.naviTitle == "New Trip" {
                                 //新旅のためstartCoordinateDictも更新
                                 startCoordinateDict = newUserLocation2
-                                
                             }
                             
                             try await FirebaseClient.shared.saveUserDatas(currentCoordinateDict: newUserLocation2, steps: "\(remainingDistance)", startCoordinateDict: startCoordinateDict)
-                            DispatchQueue.main.async {
                                 print("現在地更新保存完了")
-                            }
                             
                         } catch {
                             print("Error fetching spot data5/6: \(error)")
-                            DispatchQueue.main.async {
-                                
-                            }
                         }
-                    }
                     
                     
-                }
+                
             } catch {
                 print("Error")
-                DispatchQueue.main.async {
                     self.spotNameTF.text = "Error"
                     self.spotPlaceTF.text = "Error"
-                }
             }
         }
         

@@ -120,6 +120,7 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
         if leftLabel.text == "CANCEL" { //CANCEL
             AlertHost.alertDoubleDef(view: self, alertTitle: "Tourismをやめますか？", alertMessage: "ここまでのTourismの記録は\n保存されません。", b1Title: "Tourismをやめる", b1Style: .default, b2Title: "キャンセル") { [self] _ in
                 timer?.invalidate()
+                NotificationClient.shared.deleteTourNotification()
                 self.navigationController?.popToRootViewController(animated: true)
             }
             
@@ -149,14 +150,14 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
         if isRunning {
             rightLabel.text = "STOP"
             leftLabel.text = "CANCEL"
-            rightImageView.image = Asset.simpleDarkLeaf.image
-            leftImageView.image = Asset.simpleDarkLeaf.image
+            rightImageView.image = Asset.simpleGreenColoredShadow.image
+            leftImageView.image = Asset.simpleGreenColoredShadow.image
             
         } else {
             rightLabel.text = "RESUME"
             leftLabel.text = "FINISH"
-            rightImageView.image = Asset.simpleRedLeaf.image
-            leftImageView.image = Asset.simpleRedLeaf.image
+            rightImageView.image = Asset.simpleRedColoredShadow.image
+            leftImageView.image = Asset.simpleRedColoredShadow.image
             
         }
         
@@ -168,7 +169,6 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
     
     
     @objc func updateTimer() {
-        print("")
         secondsCount += 1
         updatetimeUI()
         updateStepLabel()
@@ -258,13 +258,18 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
             spotImageView.image = selectedImage
         }
         
-        FirebaseClient().saveSpotImage(spotImage: spotImageView.image ?? Asset.leafRed.image) { photoURL in
-            print("PHOTOURLです: \(photoURL)")
-            DispatchQueue.main.async {
-                //url取得後に行う動作
-                self.photoURL = photoURL
+        
+        Task {
+            do {
+                var photoURL2 = try await FirebaseClient().saveSpotImage(spotImage: spotImageView.image ?? Asset.leafRed.image)
+                self.photoURL = photoURL2
+                
+            } catch {
+                print("Error fetching spot date7/8: \(error)")
             }
         }
+        
+        
         
         photoLocation = userLocation
         
@@ -273,18 +278,11 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
             do {
                 //現在地の住所
                 self.placeAdress = try await OtherHosts.conversionAdress(lat: photoLocation.latitude, lng: photoLocation.longitude) //photoLocationより住所の特定
-                
-                DispatchQueue.main.async {
-                    
                     self.plusLabel.isHidden = true
                     picker.dismiss(animated: true, completion: nil)
-                    
-                }
                 
             } catch {
                 print("Error fetching spot date7/8: \(error)")
-                DispatchQueue.main.async {
-                }
             }
         }
         

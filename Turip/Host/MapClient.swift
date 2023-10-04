@@ -31,13 +31,8 @@ class MapClient {
     //2緯度経度間を直線上指定距離分進む・進んだ先の緯度経度取得
     static func decideNewLocation(startCoordinateDict: [String:String], endCoordinateDict: [String:String], distance: Double) -> [String:String]  {
         
-        let startLat = Double(startCoordinateDict["lat"]!)!
-        let startLng = Double(startCoordinateDict["lng"]!)!
-        let startLocation = CLLocationCoordinate2D(latitude: startLat, longitude: startLng)
-        
-        let endLat = Double(endCoordinateDict["lat"]!)!
-        let endLng = Double(endCoordinateDict["lng"]!)!
-        let endLocation = CLLocationCoordinate2D(latitude: endLat, longitude: endLng)
+        let startLocation = OtherHosts.shared.conversionCoordinate(startCoordinateDict)
+        let endLocation = OtherHosts.shared.conversionCoordinate(endCoordinateDict)
         
         // スタートからゴールまでの方向角度 計算
         let lat1 = startLocation.latitude.radians
