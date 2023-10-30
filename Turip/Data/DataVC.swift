@@ -70,17 +70,15 @@ class DataViewController: UIViewController {
         stepGlaph.image = Asset.glaf0.image
         
         //MARK: Health
-        OtherHosts.shared.requestAuthorization { stepsInt, error in
-            if let error = error {
-                print("SSSエラー: \(error)")
-                
-            } else if let stepsInt = stepsInt {
-                print("SSS今日のステップ数: \(stepsInt)")
-                self.stepsInt = stepsInt
+        Task {
+            do {
+                let steps = try await OtherHosts.shared.fetchStepsIfAuthorized(startDate: Date())
+                self.stepsInt = steps
                 self.setGlaf()
                 self.stepLabel.text = "\(stepsInt)"
             }
         }
+        
         
         let uiArray = [tourSpotNameTF,tourSpotPlaceTF,tourSpotDetailTV,
                        tripSpotNameTF,tripSpotPlaceTF,tripSpotDetailTV,

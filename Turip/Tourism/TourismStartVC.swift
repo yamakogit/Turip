@@ -27,11 +27,11 @@ class TourismStartViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         mapView.isUserInteractionEnabled = false
         
-        NotificationClient.shared.deleteTourNotification()
-        
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationClient.shared.deleteTourNotification()
+    }
     
     //位置情報が更新されたら呼ばれる
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {

@@ -84,15 +84,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 
                                 if let hour = components.hour, hour >= tripHour {
                                     //指定した時間以降
-                                    OtherHosts.shared.requestAuthorization { stepsInt, error in
-                                        if error != nil {
-                                            //歩数データなし -> 今日のTripを見送り
-                                            self.goHome()
-                                            
-                                        } else if stepsInt != nil {
-                                            //歩数データあり -> 今日のTripを開始
-                                            self.goLookBack()
-                                        }
+                                    let steps = try await OtherHosts.shared.fetchStepsIfAuthorized(startDate: Date())
+                                    
+                                    if steps != 0 {
+                                        //歩数データあり -> 今日のTripを開始
+                                        self.goLookBack()
+                                        
+                                    } else {
+                                        //歩数データなし -> 今日のTripを見送り
+                                        self.goHome()
                                     }
                                     
                                 } else {

@@ -37,6 +37,7 @@ class LookBackCountViewController: UIViewController {
         
         //準備 - 葉の色
         let todaySteps = UserDefaults.standard.integer(forKey: "todaySteps")
+        print("AA 葉の色の基準歩数：\(todaySteps)歩")
         if todaySteps >= 8000 {
             type = 2
         } else {

@@ -15,9 +15,7 @@ class TourismTimeViewController: UIViewController, UNUserNotificationCenterDeleg
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationItem.hidesBackButton = true
-        
     }
-    
     
     
     @IBAction func tapTimebuttons(_ sender: UIButton) {
@@ -36,6 +34,8 @@ class TourismTimeViewController: UIViewController, UNUserNotificationCenterDeleg
         
         self.performSegue(withIdentifier: "startTourism", sender: self)
     }
+    
+    
     
     
     

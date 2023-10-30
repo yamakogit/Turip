@@ -79,6 +79,10 @@ class TourismDetailViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationClient.shared.deleteTourNotification()
+    }
+    
     
     @IBAction func closeView() {
         self.navigationController?.popToRootViewController(animated: true)

@@ -53,51 +53,87 @@ class OtherHosts {
     }
     
     
-    //MARK: Health Main
-    func requestAuthorization(completion: @escaping (Int?, Error?) -> Void) {
+    //MARK: Health - 歩数許可リクエスト
+    func requestAuthorization() async throws -> Bool {
         guard HKHealthStore.isHealthDataAvailable() else {
-            print("HealthKit is not available on this device.")
-            return
+            throw NSError(domain: "HealthKitErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "HealthKit is not available on this device."])
         }
         
         let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
-        healthStore.requestAuthorization(toShare: nil, read: [stepType]) { [weak self] success, error in
-            if success {
-                self?.fetchStepCountForToday(completion: completion)
-            } else {
-                if let error = error {
+        return try await withCheckedThrowingContinuation { continuation in
+            healthStore.requestAuthorization(toShare: nil, read: [stepType]) { success, error in
+                if success {
+                    continuation.resume(returning: true)
+                } else if let error = error {
                     print("HealthKit authorization failed with error: \(error)")
-                    completion(nil, error)
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: false)
                 }
             }
         }
     }
     
     
-    //MARK: Health Sub
-    func fetchStepCountForToday(completion: @escaping (Int?, Error?) -> Void) {
+    //MARK: Health - 歩数の取得
+    func fetchStepCountForToday(startDate: Date) async throws -> Int  {
         let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
         let calendar = Calendar.current
-        let now = Date()
-        let startDate = calendar.startOfDay(for: now)
-        let endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: now)!
+        let startDate = calendar.startOfDay(for: startDate)
+        let endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!
         
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
         
-        let query = HKStatisticsQuery(quantityType: stepType, quantitySamplePredicate: predicate, options: .cumulativeSum) { query, result, error in
-            if let result = result, let sum = result.sumQuantity() {
-                let steps = sum.doubleValue(for: HKUnit.count())
-                DispatchQueue.main.async {
-                    self.stepsInt = Int(steps)
-                    completion(self.stepsInt, nil) //成功した場合、stepsIntとエラーはnilで返す
+        return try await withCheckedThrowingContinuation { continuation in
+            let query = HKStatisticsQuery(quantityType: stepType, quantitySamplePredicate: predicate, options: .cumulativeSum) { query, result, error in
+                if let result = result, let sum = result.sumQuantity() {
+                    let steps = sum.doubleValue(for: HKUnit.count())
+                    continuation.resume(returning: Int(steps))
+                } else if let error = error {
+                    continuation.resume(throwing: error)
                 }
-            } else {
-                completion(nil, error)
             }
+            
+            healthStore.execute(query)
+        }
+    }
+    
+    
+    //MARK: 前回のTripからの歩数取得のため、StartDateの算出
+    func getTripStartDate() async throws -> Date {
+        let userData = try await FirebaseClient.shared.getUserData()
+        let latestOpenedDate = userData.latestOpenedDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let date = dateFormatter.date(from: latestOpenedDate ?? "")
+        var startDate: Date!
+        if date == nil {
+            startDate = Date()
+        } else {
+            //開始日付の計算
+            startDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
         }
         
-        healthStore.execute(query)
+        return startDate
     }
+    
+    
+    //MARK: 許可確認・歩数取得
+    func fetchStepsIfAuthorized(startDate: Date) async throws -> Int {
+        let request = try await requestAuthorization()
+        if request {
+            let steps = try? await fetchStepCountForToday(startDate: startDate)
+            if steps != nil {
+                return steps!
+            } else {
+                return 0
+            }
+        } else {
+            print("Authorization not granted.")
+            return 0
+        }
+    }
+    
     
     
     //coordinate変換

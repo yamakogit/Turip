@@ -120,7 +120,6 @@ class TourismRunningViewController: UIViewController, CLLocationManagerDelegate,
         if leftLabel.text == "CANCEL" { //CANCEL
             AlertHost.alertDoubleDef(view: self, alertTitle: "Tourismをやめますか？", alertMessage: "ここまでのTourismの記録は\n保存されません。", b1Title: "Tourismをやめる", b1Style: .default, b2Title: "キャンセル") { [self] _ in
                 timer?.invalidate()
-                NotificationClient.shared.deleteTourNotification()
                 self.navigationController?.popToRootViewController(animated: true)
             }
             

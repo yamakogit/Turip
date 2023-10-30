@@ -41,7 +41,8 @@ class LookBackLocationViewController: UIViewController {
                 
                 //歩数の計算
                 let distance: Int = MapClient.calculateDistance(startCoordinateDict: userCoordinateDict!, endCoordinateDict: goalCoordinateDict!) //現在地〜ゴールまでの距離(Int)
-                self.todaySteps = UserDefaults.standard.integer(forKey: "todaySteps")
+                self.todaySteps = UserDefaults.standard.integer(forKey: "tripSteps")
+                print("AA 重要歩数\(todaySteps)歩")
                 self.remainingDistance = self.todaySteps - distance
                 
                 var centerCoordinateDict: [String:String]!

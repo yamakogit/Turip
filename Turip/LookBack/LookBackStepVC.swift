@@ -17,7 +17,7 @@ class LookBackStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.removeObject(forKey: "todaySteps")
+        UserDefaults.standard.removeObject(forKey: "tripSteps")
         UserDefaults.standard.removeObject(forKey: "calculatedDistance")
         UserDefaults.standard.removeObject(forKey: "goalUID")
         UserDefaults.standard.removeObject(forKey: "newCoordinate")
@@ -25,24 +25,23 @@ class LookBackStepViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
-        OtherHosts.shared.requestAuthorization { stepsInt, error in
-            if let error = error {
-                print("エラー: \(error)")
-                
-            } else if let stepsInt = stepsInt {
-                print("今日のステップ数: \(stepsInt)")
-                self.stepsInt = stepsInt
-                self.setGlaf()
-                UserDefaults.standard.set(stepsInt, forKey: "todaySteps")
-            }
-        }
-        
         Task {
             do {
+                
+                let todaySteps = try await OtherHosts.shared.fetchStepsIfAuthorized(startDate: Date())
+                self.stepsInt = todaySteps
+                self.setGlaf()
+                UserDefaults.standard.set(todaySteps, forKey: "todaySteps")
+                
+                let startDate = try await OtherHosts.shared.getTripStartDate()
+                let tripSteps = try await OtherHosts.shared.fetchStepsIfAuthorized(startDate: startDate)
+                UserDefaults.standard.set(tripSteps, forKey: "tripSteps")
+                
+                print("AA今日の歩数：\(todaySteps)歩")
+                print("AA今日進む歩数：\(tripSteps)歩")
+                
                 try await FirebaseClient.shared.saveLatestOpenedDatetoUser()
                 
-            } catch {
-                print("Error fetching spot data5/6: \(error)")
             }
         }
         

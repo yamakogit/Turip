@@ -81,7 +81,6 @@ class SpotViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         self.navigationItem.hidesBackButton = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        NotificationClient.shared.deleteTourNotification()
         
         if leafType == "3" { //赤
             uiSetting(isEnabled: true)

@@ -73,6 +73,7 @@ class NotificationClient {
     
     
     func deleteTourNotification() {
+        print("通知:削除")
         let identifiers = ["tourNotification"]
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }

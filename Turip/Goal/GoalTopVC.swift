@@ -74,35 +74,22 @@ class GoalTopViewController: UIViewController {
             } catch {
                 print("Error fetching spot data5/6: \(error)")
             }
-            
         }
-        
     }
     
     
     @IBAction func goNext() {
         
-        var steps = 0
-        var type = 1
-        
-        OtherHosts.shared.requestAuthorization { stepsInt, error in
-            if let error = error {
-                print("エラー: \(error)")
-            } else if let stepsInt = stepsInt {
-                print("今日のステップ数: \(stepsInt)")
-                steps = (stepsInt)
-                if steps >= 8000 {
-                    type = 2
-                }
-            }
-        }
-        
         Task {
             do {
+                var type = 1
+                let todaySteps = UserDefaults.standard.integer(forKey: "tripSteps")
+                print("AA葉の色の基準歩数：\(todaySteps)歩")
+                if todaySteps >= 8000 {
+                    type = 2
+                }
                 try await FirebaseClient.shared.saveSpotDatatoUser(spotUID: goalUID, date: date, type: "\(type)")
-                
                 performSegue(withIdentifier: "goNext", sender: self)
-                
             }
             catch {
                 print("EROOROR")
@@ -110,7 +97,6 @@ class GoalTopViewController: UIViewController {
                 AlertHost.alertDef(view: self, title: "エラー(code:2)", message: "しばらく経ってから\nやり直してください")
             }
         }
-        
     }
     
     
